@@ -10,12 +10,17 @@ This helps you to create youtube music channel more easly.
 - [ ] vue-cli
 - [ ] router
 - [ ] session / JWT / cookies
-- [ ] register
+- [ ] local register + PassportJs 
 - [ ] login
 - [ ] mongoDB
 - [ ] promises
 - [ ] SSR - ffmpeg render
-- [ ] SVG animation
+- [ ] SVG main animation
 - [ ] file uploader
+- [ ] youtube uploader
+- [ ] favico
+- [ ] animated logo
+- [ ] save config
+- [ ] PWA
 - [ ] raspberry deploy
  
