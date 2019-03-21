@@ -3,7 +3,7 @@
 ![underconstruction](https://octodex.github.com/images/constructocat2.jpg)
 
 # youtubeMusicChannelAssistance
-This helps you to create youtube music channel more easly.
+This helps you to create youtube music channel more easly. Procejct based on NodeJS+VueJS+MongoDB.
 
 ### TODO LIST:
 
