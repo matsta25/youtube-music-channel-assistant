@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  server-side:
+    build: ./server-side
+    ports:
+      - 8081:8081
+    volumes:
+      - ./server-side:/ymca/server-side
+      
