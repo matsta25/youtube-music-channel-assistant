@@ -1,0 +1,15 @@
+{
+  "name": "ymca-server-side",
+  "version": "1.0.0",
+  "description": "Node js backend.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "author": "matsta25",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

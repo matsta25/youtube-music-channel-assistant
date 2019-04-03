@@ -1,0 +1,7 @@
+#editor
+.idea
+
+#server-side
+server-side/package-lock.json
+server-side/node_modules/
+
