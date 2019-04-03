@@ -1,11 +1,13 @@
 FROM node:lts
 
-WORKDIR /ymca
+WORKDIR /ymca/server-side
 
-COPY . .
+COPY . ./
 
 RUN npm install
 
 EXPOSE 8081
 
 CMD ["npm","start"]
+
+#CMD ["ping","wp.pl"]

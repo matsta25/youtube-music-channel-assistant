@@ -8,6 +8,10 @@
     "start": "node src/app.js"
   },
   "author": "matsta25",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matsta25/youtube-music-channel-assistance.git"
+  },
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
