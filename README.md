@@ -24,3 +24,5 @@ This helps you to create youtube music channel more easly. Procejct based on Nod
 - [ ] PWA
 - [ ] raspberry deploy
  
+docker-compose build
+docker-compose up
