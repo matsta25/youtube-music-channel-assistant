@@ -19,7 +19,7 @@
 import _ from 'lodash'
 import Mp3Service from '@/services/Mp3Service'
 
-const debounceTime = 1000 
+const debounceTime = 1000
 
 export default {
   name: 'dashboard',
@@ -29,11 +29,10 @@ export default {
     }
   },
   watch: {
-    youtubeUrl:  _.debounce(async (val) => {
+    youtubeUrl: _.debounce(async (val) => {
       console.log('Val: ' + val)
       const response = await Mp3Service.sendUrl({ data: val })
-      console.log(response.data);
-
+      console.log(response.data)
     }, debounceTime)
   }
 }
