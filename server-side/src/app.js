@@ -11,6 +11,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+const server = app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post('/api/mp3', (req, res) => {
@@ -22,6 +24,14 @@ app.post('/api/mp3', (req, res) => {
     })
 });
 
+// socket-io
+
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket) {    
+    socket.on('disconnect', function() {}); 
+});
+
 // youtube-dl
 
 const downloadMp3 = function(url) {
@@ -30,19 +40,14 @@ const downloadMp3 = function(url) {
             console.log('Exit code:', code);
             console.log('Program output:', stdout);
             console.log('Program stderr:', stderr);
+            io.emit('downloadMp3', {
+                data: {
+                    code: code,
+                    stdout: stdout,
+                    stderr: stderr
+                }
+            })
           });
-
-
-    //    setTimeout(function () {
-    //      console.log('first method completed'); 
-    //      io.emit('process1',  {'status':1, 
-    //       'message':'DATAfrom1'
-    //       }); 
-    //      console.log( {data:'DATAfrom1'}); 
-    //      resolve( {data:'DATAfrom1'}); 
-    //    }, 1000); 
     }); 
     return promise; 
  }; 
-
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
