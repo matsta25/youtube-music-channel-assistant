@@ -16,7 +16,9 @@
 
         <b-row v-if="badgeStatus.err !== ''">
           <b-col cols="12">
+            <b-alert show variant="danger" dismissible>
               {{ badgeStatus.err }}
+            </b-alert>
           </b-col>
         </b-row>
 
