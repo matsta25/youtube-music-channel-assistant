@@ -6,7 +6,7 @@
             1. Paste your youtube music URL:
             </b-col>
           <b-col cols="6">
-            <b-form-input v-model="youtubeUrl" v-on:change="onChange" placeholder="Enter your name"></b-form-input>
+            <b-form-input v-model="youtubeUrl" v-on:change="onChangeUrl" placeholder="Enter your name"></b-form-input>
             <small class="text-muted">e.g. https://www.youtube.com/watch?v=smqhSl0u_sI</small>
           </b-col>
           <b-col cols="2">
@@ -61,7 +61,7 @@ export default {
         this.badgeStatus.err = str
       }
     },
-    onChange: async function (url) {
+    onChangeUrl: async function (url) {
       this.changeBadge('primary', 'Downloading...', '')
       await Mp3Service.sendUrl({ url: url })
     }
