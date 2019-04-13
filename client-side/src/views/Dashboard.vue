@@ -25,13 +25,12 @@ export default {
   name: 'dashboard',
   data () {
     return {
-      youtubeUrl: ''
+      youtubeUrl: 'https://www.youtube.com/watch?v=smqhSl0u_sI'
     }
   },
   watch: {
-    youtubeUrl: _.debounce(async (val) => {
-      console.log('Val: ' + val)
-      const response = await Mp3Service.sendUrl({ data: val })
+    youtubeUrl: _.debounce(async (url) => {
+      const response = await Mp3Service.sendUrl({ url: url })
       console.log(response.data)
     }, debounceTime)
   }
