@@ -7,5 +7,12 @@ export default {
         'Content-Type': 'multipart/form-data'
       }
     })
+  },
+  sendLogo(fd) {
+    return Api().post('/logo', fd, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 }

@@ -42,14 +42,22 @@ app.post('/api/backgroundimage', upload.single('image'), (req, res) => {
     })
 });
 
+app.post('/api/logo', upload.single('logo'), (req, res) => {
+    let logo = req.file;
+    console.log(logo);
+    saveLogo(logo);
+    res.json({
+        data: logo
+    })
+});
+
 app.post('/api/makevideo', (req, res) => {
     let audio = req.body.data.audio;
     let video = req.body.data.video;
-    console.log(audio);
-    console.log(video);
-    makevideo(audio, video);
+    let logo = req.body.data.logo;
+    makevideo(audio, video, logo);
     res.json({
-        data: `${audio} + ${video}`
+        data: `${audio} + ${video} + ${logo}`
     })
 })
 
@@ -101,10 +109,10 @@ const saveBackgroundImage = function(backgorundImage) {
 //  makevideo
 
 
-const makevideo = function(audio, video) {
+const makevideo = function(audio, video, logo) {
     let promise = new Promise(function (resolve, reject) {
         let filename = randomstring.generate()
-        shell.exec(`ffmpeg -loop 1 -i "./${video}" -i "./download/${audio}.mp3" -shortest -c:v libx264 -c:a copy ./output/"${filename}.mkv"`, function(code, stdout, stderr) {
+        shell.exec(`ffmpeg -loop 1 -i "./${video}" -i "./${logo}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "./download/${audio}.mp3" -shortest -c:v libx264 -c:a copy ./output/"${filename}.mkv"`, function(code, stdout, stderr) {
             console.log('Exit code:', code);
             console.log('Program output:', stdout);
             console.log('Program stderr:', stderr);
@@ -120,3 +128,21 @@ const makevideo = function(audio, video) {
     }); 
     return promise; 
  }; 
+
+//  savelogo
+
+const saveLogo = function(logo) {
+    let promise = new Promise(function (resolve, reject) {
+        let code = 1;
+        if ( shell.test('-f', logo.destination+logo.filename) ) { 
+           code = 0;
+        }
+        io.emit('logo', {
+            data: {
+                code: code
+            }
+        })
+    }); 
+    return promise; 
+ }; 
+

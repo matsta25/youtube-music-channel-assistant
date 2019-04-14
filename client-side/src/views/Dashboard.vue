@@ -42,7 +42,7 @@
               accept="image/*"
               v-model="backgroundImage"
               :state="Boolean(backgroundImage)"
-              placeholder="Choose a file..."
+              placeholder="Choose a image..."
               drop-placeholder="Drop image here..."
           ></b-form-file>
           </b-col>
@@ -52,19 +52,42 @@
         </b-row>
       </div>
       <hr>
+        <div class="my-5">
+        <b-row align-v="center">
+          <b-col cols="4">
+            3. Upload logo image:
+            </b-col>
+          <b-col cols="6">
+            <b-form-file
+              v-on:change="onChangeLogo"
+              accept="image/*"
+              v-model="logo"
+              :state="Boolean(logo)"
+              placeholder="Choose a logo..."
+              drop-placeholder="Drop logo here..."
+          ></b-form-file>
+          </b-col>
+          <b-col cols="2">
+            <b-badge pill :variant="logoBadgeStatus.variantType">{{ logoBadgeStatus.text }}</b-badge>
+          </b-col>
+        </b-row>
+      </div>
+      <hr>
       <div class="my-5">
         <b-row>
           <b-col cols="12">
-            3: Create a video: <b-button variant="outline-primary" @click="makeVideo">Make video</b-button>
+            4: Create a video: <b-button variant="outline-primary" @click="makeVideo">Make video</b-button>
           </b-col>
         </b-row>
       </div>
       <hr>
       <div class="my-5" >
         <b-row align-v="center">
-          <b-col cols="2">{{ mp3Filename }}</b-col>
-          <b-col cols="2">+</b-col>
+          <b-col cols="1">{{ mp3Filename }}</b-col>
+          <b-col cols="1">+</b-col>
           <b-col cols="2">{{ backgroundImageString.originalFilename }}</b-col>
+          <b-col cols="1">+</b-col>
+          <b-col cols="1">{{ logoString.originalFilename }}</b-col>
           <b-col cols="2">=</b-col>
           <b-col cols="2">
             <b-embed v-if="videoUuid !== ''" type="video" aspect="4by3" controls poster="poster.png">
@@ -104,12 +127,22 @@ export default {
         text: 'Waiting...',
         err: ''
       },
+      logoBadgeStatus: {
+        variantType: 'light',
+        text: 'Waiting...',
+        err: ''
+      },
       makevideoBadgeStatus: {
         variantType: 'light',
         text: 'Waiting...',
         err: '',
       },
       backgroundImage: null,
+      logo: null,
+      logoString: {
+        originalFilename: '',
+        path: ''
+      },
       mp3Filename: '',
       backgroundImageString: {
         originalFilename: '',
@@ -143,6 +176,14 @@ export default {
       } else {
         this.makevideoChangeBadge('danger', 'Creating failed.')
       }
+    }),
+    this.socket.on('logo', (data) => {
+      let response = data.data
+      if (response.code === 0) {
+        this.logoChangeBadge('success', 'Logo uploaded.')
+      } else {
+        this.logoChangeBadge('danger', 'Uploding failed.')
+      }
     })
   },
   methods: {
@@ -168,6 +209,10 @@ export default {
       this.backgroundImageBadgeStatus.variantType = variant
       this.backgroundImageBadgeStatus.text = text
     },
+    logoChangeBadge (variant, text) {
+      this.logoBadgeStatus.variantType = variant
+      this.logoBadgeStatus.text = text
+    },
     makevideoChangeBadge (variant, text) {
       this.makevideoBadgeStatus.variantType = variant
       this.makevideoBadgeStatus.text = text
@@ -183,18 +228,25 @@ export default {
     },
     onChangeImageBackground: async function (image) {
       let imageData = image.target.files[0];
-      console.log(imageData);
       const fd = new FormData();
       fd.append('image', imageData, imageData.name);
       const response = await ImageService.sendBackgroundImage(fd)
-      console.log("done")
       this.backgroundImageString.path = response.data.data.path
       this.backgroundImageString.originalFilename = response.data.data.originalname
     },
+    onChangeLogo: async function (logo) {
+      let logoData = logo.target.files[0];
+      const fd = new FormData();
+      fd.append('logo', logoData, logoData.name);
+      const response = await ImageService.sendLogo(fd)
+      this.logoString.path = response.data.data.path
+      console.log(this.logoString.path)
+      this.logoString.originalFilename = response.data.data.originalname
+    },
     makeVideo: async function (){
-      if( this.backgroundImageString.path && this.mp3Filename ){
+      if( this.backgroundImageString.path && this.mp3Filename && this.logoString.path ){
         this.makevideoChangeBadge('primary', 'Creating...')
-        const res = await VideoService.makeVideo(this.mp3Filename,this.backgroundImageString.path);
+        const res = await VideoService.makeVideo(this.mp3Filename,this.backgroundImageString.path, this.logoString.path);
         console.log(res);
       }
     }
