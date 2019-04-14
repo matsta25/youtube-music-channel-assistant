@@ -4,4 +4,6 @@
 #server-side
 server-side/node_modules/
 server-side/download
+server-side/uploads
+server-side/output/*
 

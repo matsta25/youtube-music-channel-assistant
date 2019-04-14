@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard">
     <b-container>
-        <b-row>
+      <div class="my-5">
+        <b-row align-v="center">
           <b-col cols="4">
             1. Paste your youtube music URL:
             </b-col>
@@ -14,14 +15,13 @@
           </b-col>
         </b-row>
 
-        <b-row v-if="mp3BadgeStatus.err !== ''">
+        <b-row class="my-5" v-if="mp3BadgeStatus.err !== ''">
           <b-col cols="12">
             <b-alert show variant="danger" dismissible>
               {{ mp3BadgeStatus.err }}
             </b-alert>
           </b-col>
         </b-row>
-
         <b-row v-if="mp3BadgeStatus.stdout !== ''">
           <b-col cols="12">
             <b-alert show variant="success" dismissible>
@@ -29,8 +29,10 @@
             </b-alert>
           </b-col>
         </b-row>
-
-        <b-row>
+      </div>
+      <hr>
+      <div class="my-5">
+        <b-row align-v="center">
           <b-col cols="4">
             2. Upload background photo:
             </b-col>
@@ -48,14 +50,24 @@
             <b-badge pill :variant="backgroundImageBadgeStatus.variantType">{{ backgroundImageBadgeStatus.text }}</b-badge>
           </b-col>
         </b-row>
-
+      </div>
+      <hr>
+      <div class="my-5">
         <b-row>
+          <b-col cols="12">
+            3: Create a video: <b-button variant="outline-primary" @click="makeVideo">Make video</b-button>
+          </b-col>
+        </b-row>
+      </div>
+      <hr>
+      <div class="my-5" >
+        <b-row align-v="center">
           <b-col cols="2">{{ mp3Filename }}</b-col>
           <b-col cols="2">+</b-col>
           <b-col cols="2">{{ backgroundImageString.originalFilename }}</b-col>
           <b-col cols="2">=</b-col>
-          <b-col cols="2" v-if="videoUuid !== ''">
-            <b-embed type="video" aspect="4by3" controls poster="poster.png">
+          <b-col cols="2">
+            <b-embed v-if="videoUuid !== ''" type="video" aspect="4by3" controls poster="poster.png">
               <source :src="'http://localhost:8081/output/' + videoUuid + '.mkv'">
             </b-embed>
           </b-col>
@@ -63,12 +75,7 @@
             <b-badge pill :variant="makevideoBadgeStatus.variantType">{{ makevideoBadgeStatus.text }}</b-badge>
           </b-col>
         </b-row>
-
-        <b-row>
-          <b-col cols="12">
-            <b-button variant="outline-primary" @click="makeVideo">Make video</b-button>
-          </b-col>
-        </b-row>
+      </div>
 
     </b-container>
   </div>
@@ -186,6 +193,7 @@ export default {
     },
     makeVideo: async function (){
       if( this.backgroundImageString.path && this.mp3Filename ){
+        this.makevideoChangeBadge('primary', 'Creating...')
         const res = await VideoService.makeVideo(this.mp3Filename,this.backgroundImageString.path);
         console.log(res);
       }
