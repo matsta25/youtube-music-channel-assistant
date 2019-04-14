@@ -227,6 +227,7 @@ export default {
       }
     },
     onChangeImageBackground: async function (image) {
+      this.backgroundImageChangeBadge('primary', 'Uploading...')
       let imageData = image.target.files[0];
       const fd = new FormData();
       fd.append('image', imageData, imageData.name);
@@ -235,6 +236,7 @@ export default {
       this.backgroundImageString.originalFilename = response.data.data.originalname
     },
     onChangeLogo: async function (logo) {
+      this.logoChangeBadge('primary', 'Uploading...')
       let logoData = logo.target.files[0];
       const fd = new FormData();
       fd.append('logo', logoData, logoData.name);
