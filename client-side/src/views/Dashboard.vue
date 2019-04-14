@@ -22,6 +22,14 @@
           </b-col>
         </b-row>
 
+        <b-row v-if="mp3BadgeStatus.stdout !== ''">
+          <b-col cols="12">
+            <b-alert show variant="success" dismissible>
+              {{ mp3BadgeStatus.stdout }}
+            </b-alert>
+          </b-col>
+        </b-row>
+
         <b-row>
           <b-col cols="4">
             2. Upload background photo:
@@ -59,6 +67,7 @@ export default {
       mp3BadgeStatus: {
         variantType: 'light',
         text: 'Waiting...',
+        stdout: '',
         err: ''
       },
       backgroundImageBadgeStatus: {
@@ -73,9 +82,9 @@ export default {
     this.socket.on('downloadMp3', (data) => {
       let response = data.data
       if (response.code === 0) {
-        this.mp3ChangeBadge('success', 'Mp3 downloaded.', '')
+        this.mp3ChangeBadge('success', 'Mp3 downloaded.', response.stdout, '')
       } else {
-        this.mp3ChangeBadge('danger', 'Downloading failed.', response.stderr)
+        this.mp3ChangeBadge('danger', 'Downloading failed.', '', response.stderr)
       }
     }),
     this.socket.on('backgroundImage', (data) => {
@@ -88,23 +97,35 @@ export default {
     })
   },
   methods: {
-    mp3ChangeBadge (variant, text, err) {
+    mp3ChangeBadge (variant, text, stdout ,err) {
       this.mp3BadgeStatus.variantType = variant
       this.mp3BadgeStatus.text = text
-      if (err !== 'undefined') {
-        let n = err.lastIndexOf('ERROR')
-        let str = err.substr(n, err.length)
-        this.mp3BadgeStatus.err = str
+      const top = "[ffmpeg] Destination: ./download/"
+      const tail = "Deleting original file ./download/"
+      let n = stdout.lastIndexOf(top);
+      console.log("n = " + n);
+      if( n !==-1 ){
+        let x = stdout.indexOf(tail)
+        console.log("x =" + x)
+        this.mp3BadgeStatus.stdout = stdout.substring(n + top.length , x)
+      }else{
+        this.mp3BadgeStatus.stdout = stdout
       }
+      this.mp3BadgeStatus.err = err
+  
     },
     backgroundImageChangeBadge (variant, text) {
       this.backgroundImageBadgeStatus.variantType = variant
       this.backgroundImageBadgeStatus.text = text
     },
     onChangeUrl: async function (url) {
-      this.mp3ChangeBadge('primary', 'Downloading...', '')
-      const response = await Mp3Service.sendUrl({ url: url })
-      console.log(response.data);
+      if(url === ''){
+        this.mp3ChangeBadge('danger', 'Failed.', '', 'Paste url.')
+      }else{
+        this.mp3ChangeBadge('primary', 'Downloading...', '', '')
+        const response = await Mp3Service.sendUrl({ url: url })
+        console.log(response.data);
+      }
     },
     onChangeImageBackground: async function (image) {
       let imageData = image.target.files[0];

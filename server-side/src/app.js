@@ -24,7 +24,7 @@ app.post('/api/mp3', (req, res) => {
     console.log(url);
     downloadMp3(url);
     res.json({
-        data: 'start downloadMp3(url)'
+        data: `start downloadMp3(${url})`
     })
 });
 
