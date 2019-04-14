@@ -8,9 +8,14 @@ const shell = require('shelljs');
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
+var randomstring = require("randomstring");
+
 const PORT = 8081
 
 app.use(cors())
+
+var serveIndex = require('serve-index')
+app.use('/output', express.static('output'), serveIndex('output', {'icons': true}))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -33,9 +38,20 @@ app.post('/api/backgroundimage', upload.single('image'), (req, res) => {
     console.log(backgorundImage);
     saveBackgroundImage(backgorundImage);
     res.json({
-        data: `start saveBackgroundImage(${JSON.stringify(backgorundImage)})`
+        data: backgorundImage
     })
 });
+
+app.post('/api/makevideo', (req, res) => {
+    let audio = req.body.data.audio;
+    let video = req.body.data.video;
+    console.log(audio);
+    console.log(video);
+    makevideo(audio, video);
+    res.json({
+        data: `${audio} + ${video}`
+    })
+})
 
 // socket-io
 
@@ -78,6 +94,29 @@ const saveBackgroundImage = function(backgorundImage) {
                 code: code
             }
         })
+    }); 
+    return promise; 
+ }; 
+
+//  makevideo
+
+
+const makevideo = function(audio, video) {
+    let promise = new Promise(function (resolve, reject) {
+        let filename = randomstring.generate()
+        shell.exec(`ffmpeg -loop 1 -i "./${video}" -i "./download/${audio}.mp3" -shortest -c:v libx264 -c:a copy ./output/"${filename}.mkv"`, function(code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
+            io.emit('makevideo', {
+                data: {
+                    code: code,
+                    stdout: stdout,
+                    stderr: stderr,
+                    filename: filename
+                }
+            })
+          });
     }); 
     return promise; 
  }; 

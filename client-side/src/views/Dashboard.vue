@@ -49,6 +49,27 @@
           </b-col>
         </b-row>
 
+        <b-row>
+          <b-col cols="2">{{ mp3Filename }}</b-col>
+          <b-col cols="2">+</b-col>
+          <b-col cols="2">{{ backgroundImageString.originalFilename }}</b-col>
+          <b-col cols="2">=</b-col>
+          <b-col cols="2" v-if="videoUuid !== ''">
+            <b-embed type="video" aspect="4by3" controls poster="poster.png">
+              <source :src="'http://localhost:8081/output/' + videoUuid + '.mkv'">
+            </b-embed>
+          </b-col>
+          <b-col cols="2">
+            <b-badge pill :variant="makevideoBadgeStatus.variantType">{{ makevideoBadgeStatus.text }}</b-badge>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col cols="12">
+            <b-button variant="outline-primary" @click="makeVideo">Make video</b-button>
+          </b-col>
+        </b-row>
+
     </b-container>
   </div>
 </template>
@@ -56,6 +77,7 @@
 <script>
 import Mp3Service from '@/services/Mp3Service'
 import ImageService from '@/services/ImageService'
+import VideoService from '@/services/VideoService'
 import io from 'socket.io-client'
 
 export default {
@@ -75,7 +97,18 @@ export default {
         text: 'Waiting...',
         err: ''
       },
-      backgroundImage: null
+      makevideoBadgeStatus: {
+        variantType: 'light',
+        text: 'Waiting...',
+        err: '',
+      },
+      backgroundImage: null,
+      mp3Filename: '',
+      backgroundImageString: {
+        originalFilename: '',
+        path: ''
+      },
+      videoUuid: ''
     }
   },
   mounted () {
@@ -94,6 +127,15 @@ export default {
       } else {
         this.backgroundImageChangeBadge('danger', 'Uploding failed.')
       }
+    }),
+    this.socket.on('makevideo', (data) => {
+      let response = data.data
+      if (response.code === 0) {
+        this.makevideoChangeBadge('success', 'Video created.')
+        this.videoUuid = response.filename
+      } else {
+        this.makevideoChangeBadge('danger', 'Creating failed.')
+      }
     })
   },
   methods: {
@@ -108,6 +150,7 @@ export default {
         let x = stdout.indexOf(tail)
         console.log("x =" + x)
         this.mp3BadgeStatus.stdout = stdout.substring(n + top.length , x)
+        this.mp3Filename = this.mp3BadgeStatus.stdout.substring(0, this.mp3BadgeStatus.stdout.length - 5)
       }else{
         this.mp3BadgeStatus.stdout = stdout
       }
@@ -117,6 +160,10 @@ export default {
     backgroundImageChangeBadge (variant, text) {
       this.backgroundImageBadgeStatus.variantType = variant
       this.backgroundImageBadgeStatus.text = text
+    },
+    makevideoChangeBadge (variant, text) {
+      this.makevideoBadgeStatus.variantType = variant
+      this.makevideoBadgeStatus.text = text
     },
     onChangeUrl: async function (url) {
       if(url === ''){
@@ -133,7 +180,15 @@ export default {
       const fd = new FormData();
       fd.append('image', imageData, imageData.name);
       const response = await ImageService.sendBackgroundImage(fd)
-      console.log(response.data);
+      console.log("done")
+      this.backgroundImageString.path = response.data.data.path
+      this.backgroundImageString.originalFilename = response.data.data.originalname
+    },
+    makeVideo: async function (){
+      if( this.backgroundImageString.path && this.mp3Filename ){
+        const res = await VideoService.makeVideo(this.mp3Filename,this.backgroundImageString.path);
+        console.log(res);
+      }
     }
   }
 }
