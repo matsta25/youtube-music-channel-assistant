@@ -4,6 +4,10 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const shell = require('shelljs');
 
+
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+
 const PORT = 8081
 
 app.use(cors())
@@ -21,6 +25,15 @@ app.post('/api/mp3', (req, res) => {
     downloadMp3(url);
     res.json({
         data: 'start downloadMp3(url)'
+    })
+});
+
+app.post('/api/backgroundimage', upload.single('image'), (req, res) => {
+    let backgorundImage = req.file;
+    console.log(backgorundImage);
+    saveBackgroundImage(backgorundImage);
+    res.json({
+        data: `start saveBackgroundImage(${JSON.stringify(backgorundImage)})`
     })
 });
 
@@ -48,6 +61,23 @@ const downloadMp3 = function(url) {
                 }
             })
           });
+    }); 
+    return promise; 
+ }; 
+
+//  saveBackgroundImage
+
+const saveBackgroundImage = function(backgorundImage) {
+    let promise = new Promise(function (resolve, reject) {
+        let code = 1;
+        if ( shell.test('-f', backgorundImage.destination+backgorundImage.filename) ) { 
+           code = 0;
+        }
+        io.emit('backgroundImage', {
+            data: {
+                code: code
+            }
+        })
     }); 
     return promise; 
  }; 
