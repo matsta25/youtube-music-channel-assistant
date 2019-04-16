@@ -23,7 +23,7 @@ ENV LC_ALL=en_US.UTF-8
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
-RUN locale-gen en_US.UTF-8
+#RUN locale-gen en_US.UTF-8
 
 #update
 RUN apt-get update --yes
