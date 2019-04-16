@@ -4,8 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const shell = require('shelljs');
 
-
-var multer  = require('multer')
+const multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 var randomstring = require("randomstring");

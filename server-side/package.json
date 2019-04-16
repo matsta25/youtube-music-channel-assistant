@@ -4,9 +4,10 @@
   "description": "Node js backend.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "start-nd": "nodemon src/app.js"
+    "start-nd": "nodemon src/app.js",
+    "start-nd-es": "nodemon src/app.js --exec 'npm run test -s'",
+    "test": "./node_modules/.bin/eslint ./"
   },
   "author": "matsta25",
   "repository": {
@@ -23,5 +24,8 @@
     "serve-index": "^1.9.1",
     "shelljs": "^0.8.3",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
   }
 }
