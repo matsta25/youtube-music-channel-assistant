@@ -91,7 +91,7 @@
           <b-col cols="2">=</b-col>
           <b-col cols="2">
             <b-embed v-if="videoUuid !== ''" type="video" aspect="4by3" controls poster="poster.png">
-              <source :src="'http://localhost:8081/output/' + videoUuid + '.mkv'">
+              <source :src="config.url + '/output/' + videoUuid + '.mkv'">
             </b-embed>
           </b-col>
           <b-col cols="2">
@@ -110,13 +110,15 @@ import ImageService from '@/services/ImageService'
 import VideoService from '@/services/VideoService'
 import io from 'socket.io-client'
 
+const config = require('../config')
+
 export default {
   name: 'dashboard',
   data () {
     return {
       youtubeUrl: 'https://www.youtube.com/watch?v=34ZWp9aMcLs',
       // socket: io('localhost:8081'),
-      socket: io('http://192.168.43.248:8081'),
+      socket: io(config.url),
       mp3BadgeStatus: {
         variantType: 'light',
         text: 'Waiting...',

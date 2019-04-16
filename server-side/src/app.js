@@ -148,3 +148,6 @@ const saveLogo = function(logo) {
     return promise; 
  }; 
 
+// ffmpeg -i 1.jpg -vf scale=w=1920:h=1080:force_original_aspect_ratio=increase 1_resized.jpg &&
+// ffmpeg -i 1_resized.jpg -vf  "crop=1920:1080:0:0" 1_resized_crop.jpg &&
+// ffmpeg -loop 1 -i 1_resized_crop.jpg -i testLogo.png -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "./download/test.mp3" -shortest -c:v libx264 -c:a copy ./output/1.mkv
