@@ -116,7 +116,7 @@ export default {
     return {
       youtubeUrl: 'https://www.youtube.com/watch?v=34ZWp9aMcLs',
       // socket: io('localhost:8081'),
-      socket: io('192.168.43.248:8081'),
+      socket: io('http://192.168.43.248:8081'),
       mp3BadgeStatus: {
         variantType: 'light',
         text: 'Waiting...',
