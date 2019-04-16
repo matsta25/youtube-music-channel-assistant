@@ -112,6 +112,9 @@ const saveBackgroundImage = function(backgorundImage) {
 const makevideo = function(audio, video, logo) {
     let promise = new Promise(function (resolve, reject) {
         let filename = randomstring.generate()
+        if (!shell.test('-d', './output/')) {
+            shell.mkdir('./output/');
+        }
         shell.exec(`ffmpeg -loop 1 -i "./${video}" -i "./${logo}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "./download/${audio}.mp3" -shortest -c:v libx264 -c:a copy ./output/"${filename}.mkv"`, function(code, stdout, stderr) {
             console.log('Exit code:', code);
             console.log('Program output:', stdout);
