@@ -54,7 +54,17 @@ app.post('/api/makevideo', (req, res) => {
     let audio = req.body.data.audio;
     let video = req.body.data.video;
     let logo = req.body.data.logo;
-    makevideo(audio, video, logo);
+
+    let data = {
+        audio: audio,
+        video: video,
+        logo: logo
+    }
+    // makevideo(audio, video, logo);
+    resizePhoto(data)
+    .then(cropVideo)
+    .then(margeVideoAudio);
+
     res.json({
         data: `${audio} + ${video} + ${logo}`
     })
@@ -148,6 +158,94 @@ const saveLogo = function(logo) {
     return promise; 
  }; 
 
-// ffmpeg -i 1.jpg -vf scale=w=1920:h=1080:force_original_aspect_ratio=increase 1_resized.jpg &&
-// ffmpeg -i 1_resized.jpg -vf  "crop=1920:1080:0:0" 1_resized_crop.jpg &&
-// ffmpeg -loop 1 -i 1_resized_crop.jpg -i testLogo.png -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "./download/test.mp3" -shortest -c:v libx264 -c:a copy ./output/1.mkv
+// ffmpeg -y -i 1.jpg -vf scale=w=1920:h=1080:force_original_aspect_ratio=increase 1_resized.jpg &&
+// ffmpeg -y -i 1_resized.jpg -vf  "crop=1920:1080:0:0" 1_resized_crop.jpg &&
+// ffmpeg -y -loop 1 -i 1_resized_crop.jpg -i testLogo.png -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "./download/test.mp3" -shortest -c:v libx264 -c:a copy ./output/1.mkv
+
+let resizePhoto = function(data) {
+    // console.log("audio0 margeVideoAudio:" + data.audio);
+    // console.log("video0 margeVideoAudio:" + data.video);
+    // console.log("logo0 margeVideoAudio:" + data.logo);
+    var promise = new Promise(function (resolve, reject) {
+        shell.exec(`ffmpeg -y -i "./${data.video}" -vf scale=w=1920:h=1080:force_original_aspect_ratio=increase "./${data.video}_resized".jpg`, function(code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
+            // io.emit('makevideo', {
+            //     data: {
+            //         code: code,
+            //         stdout: stdout,
+            //         stderr: stderr,
+            //         filename: filename
+            //     }
+            // })
+            let newData = {
+                audio: data.audio,
+                video: `${data.video}_resized`,
+                logo: data.logo
+            }
+            resolve(newData); 
+          });
+    }); 
+    return promise; 
+ }; 
+
+ let cropVideo = function(data) {
+    console.log("audio1 margeVideoAudio:" + data.audio);
+    console.log("video1 margeVideoAudio:" + data.video);
+    console.log("logo1 margeVideoAudio:" + data.logo);
+    var promise = new Promise(function (resolve, reject) {
+        shell.exec(`ffmpeg -y -i ${data.video}.jpg -vf  "crop=1920:1080:0:0" ${data.video}_crop.jpg`, function(code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
+            // io.emit('makevideo', {
+            //     data: {
+            //         code: code,
+            //         stdout: stdout,
+            //         stderr: stderr,
+            //         filename: filename
+            //     }
+            // })
+            let newData = {
+                audio: data.audio,
+                video: `${data.video}_crop`,
+                logo: data.logo
+            }
+            resolve(newData); 
+          });
+    }); 
+    return promise; 
+ }; 
+
+ let margeVideoAudio = function(data) {
+    console.log("audio2 margeVideoAudio:" + data.audio);
+    console.log("video2 margeVideoAudio:" + data.video);
+    console.log("logo2 margeVideoAudio:" + data.logo);
+    let filename = randomstring.generate()
+    if (!shell.test('-d', './output/')) {
+        shell.mkdir('./output/');
+    }
+    var promise = new Promise(function (resolve, reject) {
+        shell.exec(`ffmpeg -y -loop 1 -i ./${data.video}.jpg -i ./"${data.logo}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "./download/${data.audio}.mp3" -shortest -c:v libx264 -c:a copy ./output/"${data.audio+filename}".mkv`, function(code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
+            io.emit('makevideo', {
+                data: {
+                    code: code,
+                    stdout: stdout,
+                    stderr: stderr,
+                    filename: `${data.audio+filename}`
+                }
+            })
+            let newData = {
+                audio: data.audio,
+                video: data.video,
+                logo: data.logo
+            }
+            resolve(newData); 
+          });
+    }); 
+    return promise; 
+ }; 
