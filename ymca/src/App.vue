@@ -3,11 +3,30 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/signin">Signin</router-link>
+      <span v-if="this.$store.state.user.displayName">
+        <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }} )</a>
+      </span>
+      <span v-else>
+        <router-link to="/signin">Sign in</router-link>
+      </span>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name: 'app',
+  mounted() {
+      this.$store.dispatch('getUser')
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
