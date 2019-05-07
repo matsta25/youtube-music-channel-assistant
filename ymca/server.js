@@ -9,6 +9,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const video = require('./routes/video')
 
 require('./passport')(passport)
 
@@ -30,6 +31,7 @@ app.use(passport.session())
 
 app.use('/', main)
 app.use('/auth', auth)
+app.use('/api/video', video)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
+      <router-link to="/create">Create</router-link> |
       <span v-if="this.$store.state.user.displayName">
         <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }} )</a>
       </span>
