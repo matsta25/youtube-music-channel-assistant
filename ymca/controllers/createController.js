@@ -1,5 +1,6 @@
 const youtubeDlHelpers = require('../helpers/youtubeDlHelpers')
 const imageHelpers = require('../helpers/imageHelpers')
+const ffmpegHelpers = require('../helpers/ffmpegHelpers')
 
 exports.downloadMp3 = (req, res) => {
     let url = req.body.url;
@@ -25,3 +26,21 @@ exports.saveLogo = (req, res) => {
     })
 }
 
+exports.makeVideo = (req, res) => {
+    let audio = req.body.data.audio;
+    let video = req.body.data.video;
+    let logo = req.body.data.logo;
+
+    let data = {
+        audio: audio,
+        video: video,
+        logo: logo
+    }
+    ffmpegHelpers.resizePhoto(data)
+    .then(ffmpegHelpers.cropVideo)
+    .then(ffmpegHelpers.margeVideoAudio);
+
+    res.json({
+        data: `${audio} + ${video} + ${logo}`
+    })
+}

@@ -9,7 +9,10 @@ export default new Vuex.Store({
   state: {
     user: {},
     video: {
-      youtubeUrl: 'https://www.youtube.com/watch?v=Scn4Gzqy0n4',
+      youtubeUrl: {
+        url: 'https://www.youtube.com/watch?v=Scn4Gzqy0n4',
+        path: ''
+      },
       youtubeUrlBadge: {
         text: 'Waiting...',
         variantType: 'light',
@@ -29,6 +32,11 @@ export default new Vuex.Store({
         variantType: 'light',
         code: ''
       },
+      makeVideoBadge: {
+        text: 'Waiting...',
+        variantType: 'light',
+        code: ''
+      },
 
     },
   },
@@ -41,6 +49,7 @@ export default new Vuex.Store({
     },
     changeYoutubeUrl(state, data) {
       state.video.youtubeUrl = data
+      console.log("data AUDIo" +  JSON.stringify(data))
     },
     SOCKET_downloadMp3(state, data) {
       state.video.youtubeUrlBadge.code = data.data.code
@@ -56,6 +65,20 @@ export default new Vuex.Store({
       }
       state.video.youtubeUrlBadge.stdout = data.data.stdout
       state.video.youtubeUrlBadge.stderr = data.data.stderr
+
+      // trim filename
+      if(data.data.stdout){
+      let stdout = data.data.stdout
+      const top = "[ffmpeg] Destination: "
+      const tail = "Deleting original file "
+      let n = stdout.lastIndexOf(top);
+      if( n !==-1 ){
+        let x = stdout.indexOf(tail)
+        let mp3BadgeStatus = stdout.substring(n + top.length , x - 1)
+        state.video.youtubeUrl.path = mp3BadgeStatus
+      }
+    }
+
     },
     SOCKET_backgroundImage(state, data) {
       state.video.backgroundPhotoBadge.code = data.data.code
@@ -83,11 +106,26 @@ export default new Vuex.Store({
         state.video.logoBadge.variantType = 'primary'
       }
     },
+    SOCKET_makevideo(state, data) {
+      state.video.youtubeUrlBadge.code = data.data.code
+      if (data.data.code === 0) {
+        state.video.youtubeUrlBadge.text = 'Done.'
+        state.video.youtubeUrlBadge.variantType = 'success'
+      } else if (data.data.code === 2 || data.data.code === 1) {
+        state.video.youtubeUrlBadge.text = 'Error.'
+        state.video.youtubeUrlBadge.variantType = 'danger'
+      } else if (data.data.code === -2) {
+        state.video.youtubeUrlBadge.text = 'Downloading...'
+        state.video.youtubeUrlBadge.variantType = 'primary'
+      }
+      state.video.youtubeUrlBadge.stdout = data.data.stdout
+      state.video.youtubeUrlBadge.stderr = data.data.stderr
+    },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data
     },
     changeLogo(state, data) {
-      state.video.logo = data
+      state.video.logo = data.data
     },
 
   },
@@ -96,7 +134,6 @@ export default new Vuex.Store({
       commit
     }) {
       axios.get('/isauth').then(res => {
-        console.log("USER DATA: " + JSON.stringify(res.data))
         commit('getUser', res.data)
       }).catch(err => {
         console.log(err)
@@ -118,13 +155,14 @@ export default new Vuex.Store({
       axios.post('/create/mp3', {
         url: data
       }).then(res => {
-        console.log(res);
-        commit('changeYoutubeUrl', data)
+        commit('changeYoutubeUrl', res.data)
       }).catch(err => {
         console.log(err)
       })
     },
-    changeBackgroundPhotoBadge({commit }, data) {
+    changeBackgroundPhotoBadge({
+      commit
+    }, data) {
       commit('SOCKET_backgroundImage', data)
     },
     changeBackgroundPhoto({
@@ -135,13 +173,14 @@ export default new Vuex.Store({
           'Content-Type': 'multipart/form-data'
         }
       }).then(res => {
-        console.log(res);
-        commit('changeBackgroundPhoto', data)
+        commit('changeBackgroundPhoto', res.data.data)
       }).catch(err => {
         console.log(err)
       })
     },
-    changeLogoBadge({commit }, data) {
+    changeLogoBadge({
+      commit
+    }, data) {
       commit('SOCKET_logo', data)
     },
     changeLogo({
@@ -153,10 +192,35 @@ export default new Vuex.Store({
         }
       }).then(res => {
         console.log(res);
-        commit('changeLogo', data)
+        commit('changeLogo', res.data)
       }).catch(err => {
         console.log(err)
       })
     },
+
+    changeMakeVideoBadge({
+      commit
+    }, data) {
+      commit('SOCKET_makeVideo', data)
+    },
+    changeMakeVideo({
+      commit, state
+    }) {
+      console.log("audio" + state.video.youtubeUrl.path)
+      console.log("logo" + state.video.logo.path)
+      console.log("backgorund" + state.video.backgroundPhoto.path)
+      axios.post('/create/makevideo', {
+        data: {
+          audio: state.video.youtubeUrl.path,
+          video: state.video.backgroundPhoto.path,
+          logo: state.video.logo.path
+        }
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
   }
 })

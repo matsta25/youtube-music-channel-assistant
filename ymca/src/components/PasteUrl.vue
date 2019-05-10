@@ -3,7 +3,7 @@
     <b-row>
       <b-col cols="4">1. Paste your youtube music URL:</b-col>
       <b-col cols="6">
-        <b-form-input :value="youtubeUrl" @change="changeYoutubeUrl" placeholder="Enter your URL" :required=true></b-form-input>
+        <b-form-input :value="youtubeUrl.url" @change="changeYoutubeUrl" placeholder="Enter your URL" :required=true></b-form-input>
         <small class="text-muted">e.g. https://www.youtube.com/watch?v=Scn4Gzqy0n4</small>
       </b-col>
       <b-col cols="2">
