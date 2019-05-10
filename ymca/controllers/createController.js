@@ -16,3 +16,12 @@ exports.saveBackgroundPhoto = (req, res) => {
         data: backgorundImage
     })
 }
+
+exports.saveLogo = (req, res) => {
+    let logo = req.file;
+    imageHelpers.saveLogo(logo);
+    res.json({
+        data: logo
+    })
+}
+

@@ -21,10 +21,15 @@ export default new Vuex.Store({
       backgroundPhotoBadge: {
         text: 'Waiting...',
         variantType: 'light',
-        code: '',
-        stdout: '',
-        err: ''
+        code: ''
       },
+      logo: null,
+      logoBadge: {
+        text: 'Waiting...',
+        variantType: 'light',
+        code: ''
+      },
+
     },
   },
   mutations: {
@@ -65,8 +70,24 @@ export default new Vuex.Store({
         state.video.backgroundPhotoBadge.variantType = 'primary'
       }
     },
+    SOCKET_logo(state, data) {
+      state.video.logoBadge.code = data.data.code
+      if (data.data.code === 0) {
+        state.video.logoBadge.text = 'Done.'
+        state.video.logoBadge.variantType = 'success'
+      } else if (data.data.code === 2 || data.data.code === 1) {
+        state.video.logoBadge.text = 'Error.'
+        state.video.logoBadge.variantType = 'danger'
+      } else if (data.data.code === -2) {
+        state.video.logoBadge.text = 'Downloading...'
+        state.video.logoBadge.variantType = 'primary'
+      }
+    },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data
+    },
+    changeLogo(state, data) {
+      state.video.logo = data
     },
 
   },
@@ -103,9 +124,7 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    changeBackgroundPhotoBadge({
-      commit
-    }, data) {
+    changeBackgroundPhotoBadge({commit }, data) {
       commit('SOCKET_backgroundImage', data)
     },
     changeBackgroundPhoto({
@@ -118,6 +137,23 @@ export default new Vuex.Store({
       }).then(res => {
         console.log(res);
         commit('changeBackgroundPhoto', data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    changeLogoBadge({commit }, data) {
+      commit('SOCKET_logo', data)
+    },
+    changeLogo({
+      commit
+    }, data) {
+      axios.post('/create/logo', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(res => {
+        console.log(res);
+        commit('changeLogo', data)
       }).catch(err => {
         console.log(err)
       })
