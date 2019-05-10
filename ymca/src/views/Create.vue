@@ -4,6 +4,7 @@
       <div v-if="!this.$store.state.user.displayName">
         <h3>User: {{ this.$store.state.user.displayName }}</h3>
         <PasteUrl/>
+        <BackgroundPhoto/> 
       </div>
       <div v-else>
         To create video
@@ -15,17 +16,12 @@
 
 <script>
 import PasteUrl from "@/components/PasteUrl.vue"
+import BackgroundPhoto from "@/components/BackgroundPhoto.vue"
 
 export default {
   components: {
-    PasteUrl
-  },
-  data() {
-    return {
-      video: {
-        description: null
-      }
-    };
+    PasteUrl,
+    BackgroundPhoto
   },
   mounted() {
     this.$store.dispatch("getUser");

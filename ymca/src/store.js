@@ -16,58 +16,111 @@ export default new Vuex.Store({
         code: '',
         stdout: '',
         err: ''
-      }
+      },
+      backgroundPhoto: null,
+      backgroundPhotoBadge: {
+        text: 'Waiting...',
+        variantType: 'light',
+        code: '',
+        stdout: '',
+        err: ''
+      },
     },
   },
   mutations: {
-    getUser (state, data) {
+    getUser(state, data) {
       state.user = data
     },
-    logout ( state ) {
+    logout(state) {
       state.user = {}
     },
-    changeYoutubeUrl (state, data) {
+    changeYoutubeUrl(state, data) {
       state.video.youtubeUrl = data
     },
-    SOCKET_downloadMp3 (state, data) {
+    SOCKET_downloadMp3(state, data) {
       state.video.youtubeUrlBadge.code = data.data.code
       if (data.data.code === 0) {
         state.video.youtubeUrlBadge.text = 'Done.'
         state.video.youtubeUrlBadge.variantType = 'success'
-      }else if(data.data.code === 2 || data.data.code === 1){
+      } else if (data.data.code === 2 || data.data.code === 1) {
         state.video.youtubeUrlBadge.text = 'Error.'
         state.video.youtubeUrlBadge.variantType = 'danger'
-      }else if (data.data.code === -2) {
+      } else if (data.data.code === -2) {
         state.video.youtubeUrlBadge.text = 'Downloading...'
         state.video.youtubeUrlBadge.variantType = 'primary'
       }
       state.video.youtubeUrlBadge.stdout = data.data.stdout
       state.video.youtubeUrlBadge.stderr = data.data.stderr
     },
+    SOCKET_backgroundImage(state, data) {
+      state.video.backgroundPhotoBadge.code = data.data.code
+      if (data.data.code === 0) {
+        state.video.backgroundPhotoBadge.text = 'Done.'
+        state.video.backgroundPhotoBadge.variantType = 'success'
+      } else if (data.data.code === 2 || data.data.code === 1) {
+        state.video.backgroundPhotoBadge.text = 'Error.'
+        state.video.backgroundPhotoBadge.variantType = 'danger'
+      } else if (data.data.code === -2) {
+        state.video.backgroundPhotoBadge.text = 'Downloading...'
+        state.video.backgroundPhotoBadge.variantType = 'primary'
+      }
+    },
+    changeBackgroundPhoto(state, data) {
+      state.video.backgroundPhoto = data
+    },
 
   },
   actions: {
-      getUser ({ commit }) {
-        axios.get('/isauth').then( res => {
-          console.log("USER DATA: " + JSON.stringify(res.data))
-          commit('getUser', res.data)
-        }).catch( err => {
-          console.log(err)
-        })
-      },
-      logout ({ commit }) { 
-        commit('logout')
-      },
-      changeYoutubeUrl ({commit}, data ) {
-        axios.post('/create/mp3', { url: data }).then( res => {
-          console.log(data);
-          commit('changeYoutubeUrl', data)
-        }).catch( err => {
-          console.log(err)
-        })
-      },
-      changeYoutubeUrlBadge ({ commit }, data) {
-        commit('SOCKET_downloadMp3', data)
-      }
+    getUser({
+      commit
+    }) {
+      axios.get('/isauth').then(res => {
+        console.log("USER DATA: " + JSON.stringify(res.data))
+        commit('getUser', res.data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    logout({
+      commit
+    }) {
+      commit('logout')
+    },
+    changeYoutubeUrlBadge({
+      commit
+    }, data) {
+      commit('SOCKET_downloadMp3', data)
+    },
+    changeYoutubeUrl({
+      commit
+    }, data) {
+      axios.post('/create/mp3', {
+        url: data
+      }).then(res => {
+        console.log(res);
+        commit('changeYoutubeUrl', data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    changeBackgroundPhotoBadge({
+      commit
+    }, data) {
+      commit('SOCKET_backgroundImage', data)
+    },
+    changeBackgroundPhoto({
+      commit
+    }, data) {
+      axios.post('/create/backgroundphoto', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(res => {
+        console.log(res);
+        commit('changeBackgroundPhoto', data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
   }
 })

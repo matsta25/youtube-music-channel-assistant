@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     changeYoutubeUrl(value) {
-      this.$store.dispatch("changeYoutubeUrl", value);
       this.$store.dispatch("changeYoutubeUrlBadge", { data:{ code: -2 }});
+      this.$store.dispatch("changeYoutubeUrl", value);
     }
   }
 };
