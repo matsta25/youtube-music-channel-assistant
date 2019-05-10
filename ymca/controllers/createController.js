@@ -1,5 +1,5 @@
-const youtubeDl = require('../youtubeDlActions')
-const imageActions = require('../imageActions')
+const youtubeDl = require('../helpers/youtubeDlHelpers')
+const imageActions = require('../helpers/imageHelpers')
 
 exports.downloadMp3 = (req, res) => {
     let url = req.body.url;
