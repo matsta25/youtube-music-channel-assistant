@@ -1,9 +1,9 @@
-const youtubeDl = require('../helpers/youtubeDlHelpers')
-const imageActions = require('../helpers/imageHelpers')
+const youtubeDlHelpers = require('../helpers/youtubeDlHelpers')
+const imageHelpers = require('../helpers/imageHelpers')
 
 exports.downloadMp3 = (req, res) => {
     let url = req.body.url;
-    youtubeDl.downloadMp3(url);
+    youtubeDlHelpers.downloadMp3(url);
     res.json({
         data: `start downloadMp3(${url})`
     })
@@ -11,7 +11,7 @@ exports.downloadMp3 = (req, res) => {
 
 exports.saveBackgroundPhoto = (req, res) => {
     let backgorundImage = req.file;
-    imageActions.saveBackgroundImage(backgorundImage);
+    imageHelpers.saveBackgroundImage(backgorundImage);
     res.json({
         data: backgorundImage
     })
