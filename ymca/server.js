@@ -2,14 +2,15 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
-const main = require('./routes/main')
 const path = require('path')
-const auth = require('./routes/auth')
 const passport = require('passport') 
 const mongoose = require('mongoose')
 const session = require('express-session')
 const bodyParser = require('body-parser')
-const video = require('./routes/video')
+
+const authRouter = require('./routes/auth')
+const mainRouter = require('./routes/main')
+const createRouter = require('./routes/create')
 
 require('./passport')(passport)
 
@@ -29,9 +30,17 @@ app.use(express.static(path.join(__dirname, './dist')))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', main)
-app.use('/auth', auth)
+app.use('/', mainRouter)
+app.use('/auth', authRouter)
+app.use('/create', createRouter)
+
+const video = require('./routes/video')
 app.use('/api/video', video)
 
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+global.io = require('socket.io')(server);
+io.on('connection', function(socket) {    
+    socket.on('disconnect', function() {}); 
+});

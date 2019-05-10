@@ -4,10 +4,20 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+
 export default new Vuex.Store({
   state: {
     user: {},
-    video: {}
+    video: {
+      youtubeUrl: 'https://www.youtube.com/watch?v=Scn4Gzqy0n4',
+      youtubeUrlBadge: {
+        text: 'Waiting...',
+        variantType: 'light',
+        code: '',
+        stdout: '',
+        err: ''
+      }
+    },
   },
   mutations: {
     getUser (state, data) {
@@ -16,9 +26,25 @@ export default new Vuex.Store({
     logout ( state ) {
       state.user = {}
     },
-    changeVideoDetails ( state, data ) {
-      state.video = data
+    changeYoutubeUrl (state, data) {
+      state.video.youtubeUrl = data
     },
+    SOCKET_downloadMp3 (state, data) {
+      state.video.youtubeUrlBadge.code = data.data.code
+      if (data.data.code === 0) {
+        state.video.youtubeUrlBadge.text = 'Done.'
+        state.video.youtubeUrlBadge.variantType = 'success'
+      }else if(data.data.code === 2 || data.data.code === 1){
+        state.video.youtubeUrlBadge.text = 'Error.'
+        state.video.youtubeUrlBadge.variantType = 'danger'
+      }else if (data.data.code === -2) {
+        state.video.youtubeUrlBadge.text = 'Downloading...'
+        state.video.youtubeUrlBadge.variantType = 'primary'
+      }
+      state.video.youtubeUrlBadge.stdout = data.data.stdout
+      state.video.youtubeUrlBadge.stderr = data.data.stderr
+    },
+
   },
   actions: {
       getUser ({ commit }) {
@@ -32,24 +58,16 @@ export default new Vuex.Store({
       logout ({ commit }) { 
         commit('logout')
       },
-      changeVideoDetails ({ commit }, data) {
-        fetch(`/api/video`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ video: data })
+      changeYoutubeUrl ({commit}, data ) {
+        axios.post('/create/mp3', { url: data }).then( res => {
+          console.log(data);
+          commit('changeYoutubeUrl', data)
+        }).catch( err => {
+          console.log(err)
         })
-        .then(res => res.json())
-        .then(data => commit('changeVideoDetails', data))
       },
-      getVideoDetails ({ commit }) {
-        fetch(`/api/video`, {
-          method: 'GET'
-        })
-        .then(res => res.json())
-        .then(data => commit('changeVideoDetails', data))
+      changeYoutubeUrlBadge ({ commit }, data) {
+        commit('SOCKET_downloadMp3', data)
       }
   }
 })
