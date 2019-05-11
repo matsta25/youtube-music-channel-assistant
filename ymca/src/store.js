@@ -106,20 +106,19 @@ export default new Vuex.Store({
         state.video.logoBadge.variantType = 'primary'
       }
     },
-    SOCKET_makevideo(state, data) {
-      state.video.youtubeUrlBadge.code = data.data.code
+    SOCKET_makeVideo(state, data) {
+      console.log("HERE")
+      state.video.makeVideoBadge.code = data.data.code
       if (data.data.code === 0) {
-        state.video.youtubeUrlBadge.text = 'Done.'
-        state.video.youtubeUrlBadge.variantType = 'success'
+        state.video.makeVideoBadge.text = 'Done.'
+        state.video.makeVideoBadge.variantType = 'success'
       } else if (data.data.code === 2 || data.data.code === 1) {
-        state.video.youtubeUrlBadge.text = 'Error.'
-        state.video.youtubeUrlBadge.variantType = 'danger'
+        state.video.makeVideoBadge.text = 'Error.'
+        state.video.makeVideoBadge.variantType = 'danger'
       } else if (data.data.code === -2) {
-        state.video.youtubeUrlBadge.text = 'Downloading...'
-        state.video.youtubeUrlBadge.variantType = 'primary'
+        state.video.makeVideoBadge.text = 'Creating...'
+        state.video.makeVideoBadge.variantType = 'primary'
       }
-      state.video.youtubeUrlBadge.stdout = data.data.stdout
-      state.video.youtubeUrlBadge.stderr = data.data.stderr
     },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data

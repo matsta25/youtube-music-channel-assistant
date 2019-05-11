@@ -1,5 +1,4 @@
 const shell = require('shelljs')
-const randomstring = require("randomstring");
 
 exports.resizePhoto = function(data) {
     var promise = new Promise(function (resolve, reject) {
@@ -37,7 +36,7 @@ exports.resizePhoto = function(data) {
     }
     var promise = new Promise(function (resolve, reject) {
         shell.exec(`ffmpeg -y -loop 1 -i ${data.video}.jpg -i "${data.logo}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "${data.audio}" -shortest -c:v libx264 -c:a copy output/"${filename}".mkv`, function(code, stdout, stderr) {
-            io.emit('makevideo', {
+            io.emit('makeVideo', {
                 data: {
                     code: code,
                     stdout: stdout,
