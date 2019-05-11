@@ -34,7 +34,7 @@ module.exports = (passport) => {
             newUser.displayName = profile.displayName
             newUser.accessToken = accessToken
             newUser.photoUrl = profile.photos[0].value
-            newUser.lastTemplate = null
+            newUser.lastTemplateDescription = null
     
             newUser.save(function (err) {
                 if (err) {

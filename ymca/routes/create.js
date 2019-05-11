@@ -11,5 +11,6 @@ router.post('/backgroundphoto', uploadBackground.single('image'),  create_contro
 router.post('/logo', uploadLogo.single('logo'),  create_controller.saveLogo)
 router.post('/makevideo', create_controller.makeVideo)
 router.post('/sendToYoutube', create_controller.sendToYoutube)
+router.post('/saveTemplate', create_controller.saveTemplate)
 
 module.exports = router

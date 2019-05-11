@@ -127,6 +127,9 @@ export default new Vuex.Store({
         let outputPath = data.data.outputPath
         state.video.outputPath = outputPath
         state.video.videoDetails.title = outputPath.substring(8, outputPath.length - 4)
+        if(state.user.lastTemplateDescription){
+          state.video.videoDetails.descritpion = state.user.lastTemplateDescription 
+        }
       } else if (data.data.code === 2 || data.data.code === 1) {
         state.video.makeVideoBadge.text = 'Error.'
         state.video.makeVideoBadge.variantType = 'danger'
@@ -161,8 +164,8 @@ export default new Vuex.Store({
     changeLogo(state, data) {
       state.video.logo = data.data
     },
-    changeVideoDetails(state, data) {
-      state.video.videoDetails = data
+    changeVideoDetailsDescritpion(state, data) {
+      state.video.videoDetails.descritpion = data
     },
   },
   actions: {
@@ -278,10 +281,21 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    changeVideoDetails({
-      commit
+    changeVideoDetailsDescritpion({
+      commit, state
     }, data) {
-      commit('changeVideoDetails', data)
+      console.log(JSON.stringify(data))
+      axios.post('/create/saveTemplate', {
+        data: {
+          id: state.user.id,
+          descritpion: data,
+        }
+      } ).then(res => {
+        console.log(res);
+        commit('changeVideoDetailsDescritpion', data)
+      }).catch(err => {
+        console.log(err)
+      })
     },
 
     

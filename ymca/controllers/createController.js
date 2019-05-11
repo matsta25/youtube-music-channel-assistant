@@ -3,6 +3,8 @@ const imageHelpers = require('../helpers/imageHelpers')
 const ffmpegHelpers = require('../helpers/ffmpegHelpers')
 const youtubeApiHelpers = require('../helpers/youtubeApiHelpers') 
 
+const User = require('../models/user')
+
 exports.downloadMp3 = (req, res) => {
     let url = req.body.url;
     youtubeDlHelpers.downloadMp3(url);
@@ -62,3 +64,20 @@ exports.sendToYoutube = (req, res) => {
     })
 }
 
+exports.saveTemplate = (req, res) => {
+    console.log(JSON.stringify(req.body.data))
+    let descritpion = req.body.data.descritpion
+    let id = req.body.data.id
+
+    User.findOneAndUpdate({ 'id': id },{$set:{'lastTemplateDescription': descritpion}}, {useFindAndModify: false}, function (err, doc) {
+    if(err){
+        console.log(err)
+    }
+    console.log(doc)
+    })
+    // lastTemplateDescription
+    
+    res.json({
+        data: `Saving ${JSON.stringify(descritpion)}`
+    })
+}

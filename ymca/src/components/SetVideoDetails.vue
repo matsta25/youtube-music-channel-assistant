@@ -7,7 +7,7 @@
        <b-form-textarea
       id="textarea"
       :value="videoDetails.descritpion"
-      @change="changeVideoDetails"
+      @change="changeVideoDetailsDescritpion"
       placeholder="Enter descritpion..."
       rows="3"
       max-rows="6"
@@ -25,8 +25,8 @@ export default {
     }
   },
   methods: {
-    changeVideoDetails(value) {
-      this.$store.dispatch("changeVideoDetails", value);
+    changeVideoDetailsDescritpion(videoDetails) {
+      this.$store.dispatch("changeVideoDetailsDescritpion", videoDetails);
     }
   }
 };
