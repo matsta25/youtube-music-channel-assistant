@@ -37,7 +37,12 @@ export default new Vuex.Store({
         variantType: 'light',
         code: ''
       },
-      outputPath: ''
+      outputPath: '',
+      sendToYoutubeBadge: {
+        text: 'Waiting...',
+        variantType: 'light',
+        code: ''
+      },
 
     },
   },
@@ -121,6 +126,25 @@ export default new Vuex.Store({
         state.video.makeVideoBadge.variantType = 'primary'
       }
       state.video.outputPath = data.data.outputPath
+    },
+    changeBackgroundPhoto(state, data) {
+      state.video.backgroundPhoto = data
+    },
+    changeLogo(state, data) {
+      state.video.logo = data.data
+    },
+    SOCKET_sendToYoutube(state, data) {
+      state.video.sendToYoutubeBadge.code = data.data.code
+      if (data.data.code === 0) {
+        state.video.sendToYoutubeBadge.text = 'Done.'
+        state.video.sendToYoutubeBadge.variantType = 'success'
+      } else if (data.data.code === 2 || data.data.code === 1) {
+        state.video.sendToYoutubeBadge.text = 'Error.'
+        state.video.sendToYoutubeBadge.variantType = 'danger'
+      } else if (data.data.code === -2) {
+        state.video.sendToYoutubeBadge.text = 'Uploding...'
+        state.video.sendToYoutubeBadge.variantType = 'primary'
+      }
     },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data
@@ -222,6 +246,24 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-
+    changeSendToYoutubeBadge({
+      commit
+    }, data) {
+      commit('SOCKET_sendToYoutube', data)
+    },
+    changeSendToYoutube({
+      commit, state
+    }) {
+      axios.post('/create/sendToYoutube', {
+        data: {
+          path: state.video.outputPath,
+          accessToken: state.user.accessToken
+        }
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err)
+      })
+    },
   }
 })

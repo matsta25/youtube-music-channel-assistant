@@ -1,6 +1,7 @@
 const youtubeDlHelpers = require('../helpers/youtubeDlHelpers')
 const imageHelpers = require('../helpers/imageHelpers')
 const ffmpegHelpers = require('../helpers/ffmpegHelpers')
+const youtubeApiHelpers = require('../helpers/youtubeApiHelpers') 
 
 exports.downloadMp3 = (req, res) => {
     let url = req.body.url;
@@ -44,3 +45,20 @@ exports.makeVideo = (req, res) => {
         data: `${audio} + ${video} + ${logo}`
     })
 }
+
+exports.sendToYoutube = (req, res) => {
+    let path = req.body.data.path;
+    let accessToken = req.body.data.accessToken;
+
+    let data = {
+        path: path,
+        accessToken: accessToken
+    }
+
+    youtubeApiHelpers.sendToYoutube(data)
+
+    res.json({
+        data: `Sending to yt: ${JSON.stringify(data)}`
+    })
+}
+

@@ -16,6 +16,8 @@ module.exports = (passport) => {
         callbackURL: process.env.GOOGLE_CALLBACKURL
       },
       function(accessToken, refreshToken, profile, done) {
+          console.log("accessToken: " + accessToken)
+          console.log("refreshToken: " + refreshToken)
         User.findOne({ 'id': profile.id }, function (err, user) {
             if (err) {
             return done(err)
@@ -29,6 +31,7 @@ module.exports = (passport) => {
             newUser.id = profile.id
             newUser.username = profile.username
             newUser.displayName = profile.displayName
+            newUser.accessToken = accessToken
     
             newUser.save(function (err) {
                 if (err) {

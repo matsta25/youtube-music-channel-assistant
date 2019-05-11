@@ -1,13 +1,14 @@
 <template>
   <div class="create">
     <b-container>
-      <div v-if="!this.$store.state.user.displayName">
+      <div v-if="this.$store.state.user.displayName">
         <h3>User: {{ this.$store.state.user.displayName }}</h3>
         <PasteUrl/>
         <BackgroundPhoto/> 
         <Logo/>
         <MakeVideo/>
         <VideoPreview/>
+        <SendToYoutube/>
       </div>
       <div v-else>
         To create video
@@ -23,6 +24,7 @@ import BackgroundPhoto from "@/components/BackgroundPhoto.vue"
 import Logo from "@/components/Logo.vue"
 import MakeVideo from "@/components/MakeVideo.vue"
 import VideoPreview from "@/components/VideoPreview.vue"
+import SendToYoutube from "@/components/SendToYoutube.vue"
 
 export default {
   components: {
@@ -30,7 +32,8 @@ export default {
     BackgroundPhoto,
     Logo,
     MakeVideo,
-    VideoPreview
+    VideoPreview,
+    SendToYoutube
   },
   mounted() {
     this.$store.dispatch("getUser");
