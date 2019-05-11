@@ -6,7 +6,8 @@ let User = new Schema({
     displayName: String,
     username: String,
     accessToken: String,
-    photoUrl: String
+    photoUrl: String,
+    lastTemplate: String
 })
 
 module.exports = mongoose.model('User', User)

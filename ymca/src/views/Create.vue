@@ -8,11 +8,12 @@
         <Logo/>
         <MakeVideo/>
         <VideoPreview/>
+        <SetVideoDetails/>
         <SendToYoutube/>
       </div>
       <div v-else>
         To create video
-        <router-link to="/signin">Sign in</router-link>first.
+        <router-link to="/signin">Sign in </router-link>first.
       </div>
     </b-container>
   </div>
@@ -24,6 +25,7 @@ import BackgroundPhoto from "@/components/BackgroundPhoto.vue"
 import Logo from "@/components/Logo.vue"
 import MakeVideo from "@/components/MakeVideo.vue"
 import VideoPreview from "@/components/VideoPreview.vue"
+import SetVideoDetails from "@/components/SetVideoDetails.vue"
 import SendToYoutube from "@/components/SendToYoutube.vue"
 
 export default {
@@ -33,6 +35,7 @@ export default {
     Logo,
     MakeVideo,
     VideoPreview,
+    SetVideoDetails,
     SendToYoutube
   },
   mounted() {

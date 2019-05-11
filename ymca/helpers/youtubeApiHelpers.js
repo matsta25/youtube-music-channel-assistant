@@ -11,8 +11,8 @@ exports.sendToYoutube = function (data) {
         Youtube.videos.insert({
             resource: {
                 snippet: {
-                    title: data.path
-                  , description: "Test video upload via YouTube API"
+                    title: data.title
+                  , description: data.descritpion
                 }
               , status: {
                     privacyStatus: "private"

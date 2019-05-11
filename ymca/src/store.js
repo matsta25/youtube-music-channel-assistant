@@ -44,6 +44,10 @@ export default new Vuex.Store({
         code: '',
         err: ''
       },
+      videoDetails: {
+        title: '',
+        descritpion: ''
+      }
 
     },
   },
@@ -120,6 +124,9 @@ export default new Vuex.Store({
       if (data.data.code === 0) {
         state.video.makeVideoBadge.text = 'Done.'
         state.video.makeVideoBadge.variantType = 'success'
+        let outputPath = data.data.outputPath
+        state.video.outputPath = outputPath
+        state.video.videoDetails.title = outputPath.substring(8, outputPath.length - 4)
       } else if (data.data.code === 2 || data.data.code === 1) {
         state.video.makeVideoBadge.text = 'Error.'
         state.video.makeVideoBadge.variantType = 'danger'
@@ -127,7 +134,6 @@ export default new Vuex.Store({
         state.video.makeVideoBadge.text = 'Creating...'
         state.video.makeVideoBadge.variantType = 'primary'
       }
-      state.video.outputPath = data.data.outputPath
     },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data
@@ -155,7 +161,9 @@ export default new Vuex.Store({
     changeLogo(state, data) {
       state.video.logo = data.data
     },
-
+    changeVideoDetails(state, data) {
+      state.video.videoDetails = data
+    },
   },
   actions: {
     getUser({
@@ -260,7 +268,9 @@ export default new Vuex.Store({
       axios.post('/create/sendToYoutube', {
         data: {
           path: state.video.outputPath,
-          accessToken: state.user.accessToken
+          accessToken: state.user.accessToken,
+          title: state.video.videoDetails.title,
+          descritpion: state.video.videoDetails.descritpion,
         }
       }).then(res => {
         console.log(res);
@@ -268,5 +278,12 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    changeVideoDetails({
+      commit
+    }, data) {
+      commit('changeVideoDetails', data)
+    },
+
+    
   }
 })
