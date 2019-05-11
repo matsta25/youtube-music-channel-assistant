@@ -12,7 +12,9 @@ const authRouter = require('./routes/auth')
 const mainRouter = require('./routes/main')
 const createRouter = require('./routes/create')
 
+const fixMiddleware = require('./spa-fix')
 
+app.use(fixMiddleware)
 
 require('./passport')(passport)
 
