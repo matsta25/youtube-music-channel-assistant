@@ -2,6 +2,7 @@
 node_modules
 /dist
 /res
+/output
 
 .env
 # local env files
