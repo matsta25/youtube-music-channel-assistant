@@ -30,7 +30,8 @@ exports.resizePhoto = function(data) {
  }; 
 
  exports.margeVideoAudio = function(data) {
-    let filename = randomstring.generate()
+    let tail = data.audio.length - 4
+    let filename = data.audio.substring(12, tail)
     if (!shell.test('-d', './output/')) {
         shell.mkdir('./output/');
     }
