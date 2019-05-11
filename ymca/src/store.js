@@ -41,13 +41,15 @@ export default new Vuex.Store({
       sendToYoutubeBadge: {
         text: 'Waiting...',
         variantType: 'light',
-        code: ''
+        code: '',
+        err: ''
       },
 
     },
   },
   mutations: {
     getUser(state, data) {
+      console.log("USER: " +  JSON.stringify(data))
       state.user = data
     },
     logout(state) {
@@ -145,6 +147,7 @@ export default new Vuex.Store({
         state.video.sendToYoutubeBadge.text = 'Uploding...'
         state.video.sendToYoutubeBadge.variantType = 'primary'
       }
+      state.video.sendToYoutubeBadge.err = data.data.err
     },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data

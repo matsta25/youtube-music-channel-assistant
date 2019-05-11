@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/create">Create</router-link> |
       <span v-if="this.$store.state.user.displayName">
-        <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }} )</a>
+        <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }}  <b-img :src="this.$store.state.user.photoUrl" width="50" height="50" rounded="circle"></b-img> )</a>
       </span>
       <span v-else>
         <router-link to="/signin">Sign in</router-link>

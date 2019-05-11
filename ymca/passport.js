@@ -18,13 +18,14 @@ module.exports = (passport) => {
       function(accessToken, refreshToken, profile, done) {
           console.log("accessToken: " + accessToken)
           console.log("refreshToken: " + refreshToken)
-        User.findOne({ 'id': profile.id }, function (err, user) {
+          console.log("profile: " + JSON.stringify(profile.photos[0].value))
+        User.findOneAndUpdate({ 'id': profile.id },{$set:{'accessToken': accessToken}}, {new: true, useFindAndModify: false}, function (err, user) {
             if (err) {
             return done(err)
             }
     
             if (user) {
-            return done(null, user)
+                return done(null, user)
             } else {
             var newUser = new User()
     
@@ -32,13 +33,14 @@ module.exports = (passport) => {
             newUser.username = profile.username
             newUser.displayName = profile.displayName
             newUser.accessToken = accessToken
+            newUser.photoUrl = profile.photos[0].value
     
             newUser.save(function (err) {
                 if (err) {
                 throw err
                 }
     
-                return done(null, profile)
+                return done(null, newUser)
             })
             }
         })

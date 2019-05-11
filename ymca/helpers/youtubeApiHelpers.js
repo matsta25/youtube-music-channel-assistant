@@ -34,8 +34,7 @@ exports.sendToYoutube = function (data) {
             io.emit('sendToYoutube', {
                 data: {
                     code: code,
-                    // stdout: stdout,
-                    // stderr: stderr
+                    err: err
                 }
             })
         });
