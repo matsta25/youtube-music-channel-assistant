@@ -31,17 +31,17 @@ exports.resizePhoto = function(data) {
  exports.margeVideoAudio = function(data) {
     let tail = data.audio.length - 4
     let filename = data.audio.substring(12, tail)
-    if (!shell.test('-d', './output/')) {
-        shell.mkdir('./output/');
+    if (!shell.test('-d', './dist/output/')) {
+        shell.mkdir('./dist/output/');
     }
     var promise = new Promise(function (resolve, reject) {
-        shell.exec(`ffmpeg -y -loop 1 -i ${data.video}.jpg -i "${data.logo}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "${data.audio}" -shortest -c:v libx264 -c:a copy output/"${filename}".mkv`, function(code, stdout, stderr) {
+        shell.exec(`ffmpeg -y -loop 1 -i ${data.video}.jpg -i "${data.logo}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -i "${data.audio}" -shortest -c:v libx264 -c:a copy ./dist/output/"${filename}".mkv`, function(code, stdout, stderr) {
             io.emit('makeVideo', {
                 data: {
                     code: code,
                     stdout: stdout,
                     stderr: stderr,
-                    filename: `${data.audio+filename}`
+                    outputPath: `${'/output/'+filename+'.mkv'}`
                 }
             })
             let newData = {

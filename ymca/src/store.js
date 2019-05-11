@@ -37,6 +37,7 @@ export default new Vuex.Store({
         variantType: 'light',
         code: ''
       },
+      outputPath: ''
 
     },
   },
@@ -119,6 +120,7 @@ export default new Vuex.Store({
         state.video.makeVideoBadge.text = 'Creating...'
         state.video.makeVideoBadge.variantType = 'primary'
       }
+      state.video.outputPath = data.data.outputPath
     },
     changeBackgroundPhoto(state, data) {
       state.video.backgroundPhoto = data

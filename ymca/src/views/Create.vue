@@ -7,6 +7,7 @@
         <BackgroundPhoto/> 
         <Logo/>
         <MakeVideo/>
+        <VideoPreview/>
       </div>
       <div v-else>
         To create video
@@ -21,13 +22,15 @@ import PasteUrl from "@/components/PasteUrl.vue"
 import BackgroundPhoto from "@/components/BackgroundPhoto.vue"
 import Logo from "@/components/Logo.vue"
 import MakeVideo from "@/components/MakeVideo.vue"
+import VideoPreview from "@/components/VideoPreview.vue"
 
 export default {
   components: {
     PasteUrl,
     BackgroundPhoto,
     Logo,
-    MakeVideo
+    MakeVideo,
+    VideoPreview
   },
   mounted() {
     this.$store.dispatch("getUser");
