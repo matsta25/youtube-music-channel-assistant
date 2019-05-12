@@ -10,7 +10,7 @@
       </h2>
 
       <a href="/auth/google">
-        <img alt="Vue logo" src="../assets/btn_google_signin_dark_normal_web.png" />
+        <img alt="Vue logo" src="../assets/btn_google_signin_light_normal_web.png" />
       </a>
   </b-row>
 
