@@ -4,7 +4,7 @@
       <b-container>
         <b-navbar-brand>
           <router-link to="/">
-            <img alt="Vue logo" height="30" width="30" src="./assets/logo.png" class="d-inline-block align-top" />
+            <img alt="Vue logo" height="30" width="30" src="./assets/logo.svg" class="d-inline-block align-top" />
             ymca
           </router-link>
         </b-navbar-brand>
@@ -57,7 +57,7 @@
           
         </b-col>
         <b-col>
-          <img alt="Vue logo" height="30" width="30" src="./assets/logo.png" class="d-inline-block align-top" />
+          <img alt="Vue logo" height="30" width="30" src="./assets/logo.svg" class="d-inline-block align-top" />
         </b-col>
         <b-col>
           <a href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/LICENSE" target="blank">
@@ -125,4 +125,5 @@ export default {
     padding: 0 5px;
   }
 }
+
 </style>

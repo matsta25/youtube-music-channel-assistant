@@ -4,7 +4,7 @@
     <div class="container">
       <img class="background" src="../assets/ymcaBackground.svg">
         <div class="centered-element">
-        <img class="logo" src="../assets/ymcaLogoV2.svg"> 
+        <img class="logo" src="../assets/logo.svg"> 
         </div>
     </div>
     
@@ -15,6 +15,14 @@
 
 export default {
   name: "home",
+  mounted() {
+    var time = Math.random();
+    console.log("time"+ time);
+    let Layer_2 = this.$el.querySelector('#Layer_2');
+    Layer_2.style.setProperty('--animation-time', time +'s');
+
+    console.log("Layer_2"+ Layer_2);
+  }
 };
 </script>
 
@@ -42,4 +50,5 @@ export default {
   top: 50%;
   margin-top: -115px;
 }
+
 </style>
