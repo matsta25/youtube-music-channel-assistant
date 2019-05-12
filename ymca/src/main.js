@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 
-
 import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
   debug: true,
@@ -21,6 +20,15 @@ Vue.use(new VueSocketIO({
       mutationPrefix: 'SOCKET_'
   },
 }))
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+library.add(fab)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({
   router,

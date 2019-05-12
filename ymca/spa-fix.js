@@ -4,7 +4,6 @@ var fixMiddleware = history();
 
 var router = require('express').Router();
 
-router.get('/about',fixMiddleware)
 router.get('/create',fixMiddleware)
 router.get('/signin',fixMiddleware)
 

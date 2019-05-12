@@ -22,8 +22,8 @@
             <b-nav-item>
               <router-link to="/create">Create</router-link>
             </b-nav-item>
-            <b-nav-item>
-              <router-link to="/about">About</router-link>
+            <b-nav-item href="https://github.com/matsta25/youtube-music-channel-assistant" target="blank">
+                <font-awesome-icon :icon="['fab', 'github']" />
             </b-nav-item>
             <span v-if="this.$store.state.user.displayName">
               <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }}  
@@ -75,12 +75,11 @@ export default {
     background-color: #2B3A42 !important;
     text-decoration: none;
     :hover{
-
       text-decoration: none;
     }
     a .router-link-exact-active{
       color: #F3F3F3;
-      font-weight: bold;
+      text-decoration: underline;
     }
     a {
       color: white;
