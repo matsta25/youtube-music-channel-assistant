@@ -4,7 +4,7 @@
       <b-container>
         <b-navbar-brand>
           <router-link to="/">
-            <img src="https://placekitten.com/g/30/30" class="d-inline-block align-top" alt="Kitten">
+            <img alt="Vue logo" height="30" width="30" src="./assets/logo.png" class="d-inline-block align-top" />
             ymca
           </router-link>
         </b-navbar-brand>
@@ -27,7 +27,7 @@
             </b-nav-item>
             <span v-if="this.$store.state.user.displayName">
               <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }}  
-                <b-img :src="this.$store.state.user.photoUrl" width="40" height="40" rounded="circle"></b-img> )
+                <b-img :src="this.$store.state.user.photoUrl" width="30" height="30" rounded="circle"></b-img> )
               </a>
             </span>
             <span v-else>
@@ -42,6 +42,34 @@
     </b-navbar>
     <b-container>
     <router-view />
+    <footer>
+
+      <b-container class="footer__inner">
+        <hr>
+       <b-row>
+        <b-col>
+          <a href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/README.md" target="blank">
+            <font-awesome-icon :icon="['fab', 'readme']" /> readme
+          </a>
+          <a href="https://github.com/matsta25/youtube-music-channel-assistant/issues" target="blank">
+            <font-awesome-icon :icon="['fas', 'bug']" /> issues
+          </a>
+          
+        </b-col>
+        <b-col>
+          <img alt="Vue logo" height="30" width="30" src="./assets/logo.png" class="d-inline-block align-top" />
+        </b-col>
+        <b-col>
+          <a href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/LICENSE" target="blank">
+            <font-awesome-icon :icon="['fab', 'github']" /> matsta25
+          </a>
+          <a href="https://github.com/matsta25" target="blank">
+            <font-awesome-icon :icon="['fas', 'user-circle']" /> license
+          </a>
+        </b-col>
+      </b-row>
+      </b-container>
+    </footer>
     </b-container>
   </div>
 </template>
@@ -70,20 +98,27 @@ export default {
   text-align: center;
   color: white;
   background-color: #2B3A42;
-}
-#nav {
-    background-color: #2B3A42 !important;
+  text-decoration: none;
+  :hover{
     text-decoration: none;
-    :hover{
-      text-decoration: none;
-    }
-    a .router-link-exact-active{
-      color: #F3F3F3;
-      text-decoration: underline;
-    }
-    a {
-      color: white;
-    }
   }
+  a .router-link-exact-active{
+    color: #F3F3F3;
+    text-decoration: underline;
+  }
+  a {
+    color: white;
+  }
+}
 
+#nav {
+  background-color: #2B3A42 !important;
+}
+
+.footer__inner{
+  padding: 8px 0;
+  & a {
+    padding: 0 5px;
+  }
+}
 </style>
