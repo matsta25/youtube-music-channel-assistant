@@ -14,15 +14,7 @@
 <script>
 
 export default {
-  name: "home",
-  mounted() {
-    var time = Math.random();
-    console.log("time"+ time);
-    let Layer_2 = this.$el.querySelector('#Layer_2');
-    Layer_2.style.setProperty('--animation-time', time +'s');
-
-    console.log("Layer_2"+ Layer_2);
-  }
+  name: "home"
 };
 </script>
 

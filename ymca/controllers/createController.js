@@ -51,10 +51,14 @@ exports.makeVideo = (req, res) => {
 exports.sendToYoutube = (req, res) => {
     let path = req.body.data.path;
     let accessToken = req.body.data.accessToken;
+    let title = req.body.data.title;
+    let descritpion = req.body.data.descritpion;
 
     let data = {
         path: path,
-        accessToken: accessToken
+        accessToken: accessToken,
+        title: title,
+        descritpion: descritpion
     }
 
     youtubeApiHelpers.sendToYoutube(data)
