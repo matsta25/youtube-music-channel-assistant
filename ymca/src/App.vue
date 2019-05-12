@@ -25,16 +25,16 @@
             <b-nav-item href="https://github.com/matsta25/youtube-music-channel-assistant" target="blank">
                 <font-awesome-icon :icon="['fab', 'github']" />
             </b-nav-item>
-            <span v-if="this.$store.state.user.displayName">
-              <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }}  
-                <b-img :src="this.$store.state.user.photoUrl" width="30" height="30" rounded="circle"></b-img> )
-              </a>
-            </span>
-            <span v-else>
-              <b-nav-item>
-                <router-link to="/signin">Sign in</router-link>
-              </b-nav-item>
-            </span>
+            <b-nav-item class="d-inline-block align-top">
+              <span v-if="this.$store.state.user.displayName">
+                <a href="/logout" @click="logout">Log out ( {{ this.$store.state.user.displayName }}  
+                  <b-img :src="this.$store.state.user.photoUrl" width="30" height="30" rounded="circle"></b-img> )
+                </a>
+              </span>
+              <span v-else>
+                  <router-link to="/signin">Sign in</router-link>
+              </span>
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
     </b-container>
