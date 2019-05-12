@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar id="nav" toggleable="lg" type="dark" variant="dark">
       <b-container>
         <b-navbar-brand>
           <router-link to="/">
@@ -17,7 +17,7 @@
           <b-navbar-nav class="ml-auto">
 
             <b-nav-item>
-              <router-link to="/">Home</router-link>
+              <router-link to="/" >Home</router-link>
               </b-nav-item>
             <b-nav-item>
               <router-link to="/create">Create</router-link>
@@ -68,16 +68,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  background-color: #2B3A42;
 }
 #nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+    background-color: #2B3A42 !important;
+    text-decoration: none;
+    :hover{
+
+      text-decoration: none;
+    }
+    a .router-link-exact-active{
+      color: #F3F3F3;
+      font-weight: bold;
+    }
+    a {
+      color: white;
     }
   }
-}
+
 </style>
