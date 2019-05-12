@@ -125,5 +125,8 @@ export default {
     padding: 0 5px;
   }
 }
+.navbar-dark .navbar-toggler{
+  border-color: rgba(255, 255, 255, 0) !important;
+}
 
 </style>
