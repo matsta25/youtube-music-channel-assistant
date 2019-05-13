@@ -1,11 +1,11 @@
 <template>
   <div class="backgroundPhoto">
     <b-row>
-      <b-col cols="4">2. Upload background photo:</b-col>
+      <b-col cols="4">2. Upload background photo: </b-col>
       <b-col cols="6">
         <b-form-file
           @change="changeBackgroundPhoto"
-          accept="image/*"
+          accept=".jpg"
           backgroundPhoto="backgroundPhoto"
           :state="Boolean(backgroundPhoto)"
           placeholder="Choose a image..."

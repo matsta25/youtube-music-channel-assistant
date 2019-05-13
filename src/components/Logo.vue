@@ -1,11 +1,11 @@
 <template>
   <div class="logo">
     <b-row>
-      <b-col cols="4">3. Upload logo image:</b-col>
+      <b-col cols="4">3. Upload logo image: </b-col>
       <b-col cols="6">
         <b-form-file
           @change="changeLogo"
-          accept="image/*"
+          accept=".png"
           logo="logo"
           :state="Boolean(logo)"
           placeholder="Choose a logo..."

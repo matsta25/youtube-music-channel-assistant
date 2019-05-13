@@ -4,7 +4,7 @@ node_modules
 /res
 /output
 
-# .env
+.env
 # local env files
 
 .env.local
