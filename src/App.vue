@@ -70,33 +70,35 @@
                 href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/README.md"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fab', 'readme']"/>readme
+                <font-awesome-icon :icon="['fab', 'readme']"/> readme
               </a>
               <a
                 href="https://github.com/matsta25/youtube-music-channel-assistant/issues"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fas', 'bug']"/>issues
+                <font-awesome-icon :icon="['fas', 'bug']"/> issues
               </a>
             </b-col>
             <b-col>
-              <img
-                alt="Vue logo"
-                height="30"
-                width="30"
-                src="./assets/logo.svg"
-                class="d-inline-block align-top"
-              >
+              <router-link to="/">
+                <img
+                  alt="Vue logo"
+                  height="30"
+                  width="30"
+                  src="./assets/logo.svg"
+                  class="d-inline-block align-top"
+                >
+              </router-link>
             </b-col>
             <b-col>
               <a
                 href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/LICENSE"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fab', 'github']"/>matsta25
+                <font-awesome-icon :icon="['fab', 'github']"/> matsta25
               </a>
               <a href="https://github.com/matsta25" target="blank">
-                <font-awesome-icon :icon="['fas', 'user-circle']"/>license
+                <font-awesome-icon :icon="['fas', 'user-circle']"/> license
               </a>
             </b-col>
           </b-row>
@@ -152,7 +154,7 @@ export default {
 .footer__inner {
   padding: 8px 0;
   & a {
-    padding: 0 5px;
+    padding: 0 10px;
   }
 }
 .navbar-dark .navbar-toggler {
@@ -161,28 +163,27 @@ export default {
 
 html,
 body {
-   margin:0;
-   padding:0;
-   height:100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-#app{
-   min-height:100%;
-   position:relative;
+#app {
+  min-height: 100%;
+  position: relative;
 }
 
 #header {
 }
 
-
 #body {
-   padding-bottom:91px;   /* Height of the footer */
+  padding-bottom: 91px; /* Height of the footer */
 }
 
 #footer {
-   position:absolute;
-   bottom:0;
-   width:100%;
-   height:91px;   /* Height of the footer */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 91px; /* Height of the footer */
 }
 </style>
