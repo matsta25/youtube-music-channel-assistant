@@ -1,6 +1,6 @@
 <template>
   <div class="videoPreview">
-    <b-row>
+    <b-row class="my-3">
       <b-col cols="12" v-if="outputPath">
           <b-embed type="video" aspect="16by9" controls>
             <source :src="outputPath" type="video/webm">

@@ -16,16 +16,6 @@
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
     </div>
-
-    
-    <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque laborum pariatur.
-    </div>
     
   </div>
 </template>

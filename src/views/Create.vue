@@ -2,7 +2,6 @@
   <div class="create">
     <b-container>
       <div v-if="this.$store.state.user.displayName">
-        <h3>User: {{ this.$store.state.user.displayName }}</h3>
         <PasteUrl/>
         <BackgroundPhoto/> 
         <Logo/>
@@ -13,7 +12,8 @@
       </div>
       <div v-else>
         To create video
-        <router-link to="/signin">Sign in </router-link>first.
+          <router-link to="/signin"><span class="text-link">Sign in</span> </router-link>
+          first.
       </div>
     </b-container>
   </div>
@@ -45,3 +45,4 @@ export default {
   }
 };
 </script>
+

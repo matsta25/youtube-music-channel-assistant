@@ -1,17 +1,19 @@
 <template>
   <div class="setVideoDetails">
-    <b-row>
-      5: Set video details:
+    <b-row class="my-3 ">
+      <b-col cols="3 py-5">5: Set video details:</b-col>
 
-      <b-form-input :value="videoDetails.title" placeholder="Enter your title"></b-form-input>
-       <b-form-textarea
-      id="textarea"
-      :value="videoDetails.descritpion"
-      @change="changeVideoDetailsDescritpion"
-      placeholder="Enter descritpion..."
-      rows="3"
-      max-rows="6"
-    ></b-form-textarea>
+      <b-col cols="9">
+        <b-form-input :value="videoDetails.title" placeholder="Enter your title"></b-form-input>
+        <b-form-textarea
+          id="textarea"
+          :value="videoDetails.descritpion"
+          @change="changeVideoDetailsDescritpion"
+          placeholder="Enter descritpion..."
+          rows="5"
+          max-rows="6"
+        ></b-form-textarea>
+      </b-col>
     </b-row>
   </div>
 </template>

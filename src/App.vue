@@ -186,4 +186,19 @@ body {
   width: 100%;
   height: 91px; /* Height of the footer */
 }
+
+.text-link {
+  color: #5299C8;
+}
+
+.btn-outline-primary {
+    color: #5299C8 !important;
+    border-color: #5299C8 !important;
+}
+
+.badge-primary {
+    color: #fff;
+    border-color: #5299C8 !important;
+}
+
 </style>

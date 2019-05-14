@@ -1,12 +1,12 @@
 <template>
   <div class="pasteUrl">
-    <b-row>
-      <b-col cols="4">1. Paste your youtube music URL:</b-col>
+    <b-row class="my-3">
+      <b-col cols="4 py-2">1. Paste your youtube music URL:</b-col>
       <b-col cols="6">
         <b-form-input :value="youtubeUrl.url" @change="changeYoutubeUrl" placeholder="Enter your URL" :required=true></b-form-input>
         <small class="text-muted">e.g. https://www.youtube.com/watch?v=Scn4Gzqy0n4</small>
       </b-col>
-      <b-col cols="2">
+      <b-col cols="2 py-1">
         <b-badge pill :variant="youtubeUrlBadge.variantType">{{ youtubeUrlBadge.text }}</b-badge>
       </b-col>
     </b-row>
