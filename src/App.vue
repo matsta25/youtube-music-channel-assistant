@@ -201,4 +201,16 @@ body {
     border-color: #5299C8 !important;
 }
 
+
+// test
+
+#body {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 </style>
