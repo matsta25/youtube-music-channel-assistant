@@ -1,7 +1,7 @@
 <template>
   <div class="backgroundPhoto">
     <b-row class="my-3">
-      <b-col cols="4 py-2">2. Upload background photo: </b-col>
+      <b-col cols="4 py-2">2. Upload background photo:</b-col>
       <b-col cols="6">
         <b-form-file
           @change="changeBackgroundPhoto"
@@ -13,9 +13,11 @@
         ></b-form-file>
       </b-col>
       <b-col cols="2 py-1">
-        <b-badge pill :variant="backgroundPhotoBadge.variantType">{{
+        <b-badge pill :variant="backgroundPhotoBadge.variantType">
+          {{
           backgroundPhotoBadge.text
-        }}</b-badge>
+          }}
+        </b-badge>
       </b-col>
     </b-row>
   </div>

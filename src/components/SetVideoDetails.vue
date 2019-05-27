@@ -1,13 +1,10 @@
 <template>
   <div class="setVideoDetails">
-    <b-row class="my-3 ">
+    <b-row class="my-3">
       <b-col cols="3 py-5">5: Set video details:</b-col>
 
       <b-col cols="9">
-        <b-form-input
-          :value="videoDetails.title"
-          placeholder="Enter your title"
-        ></b-form-input>
+        <b-form-input :value="videoDetails.title" placeholder="Enter your title"></b-form-input>
         <b-form-textarea
           id="textarea"
           :value="videoDetails.descritpion"

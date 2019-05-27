@@ -1,16 +1,16 @@
 <template>
   <div class="pasteUrl">
     <b-row class="my-3">
-      <b-col cols="10 py-2"
-        >4: Create a video:
-        <b-button variant="outline-primary" @click="changeMakeVideo"
-          >Make video</b-button
-        ></b-col
-      >
+      <b-col cols="10 py-2">
+        4: Create a video:
+        <b-button variant="outline-primary" @click="changeMakeVideo">Make video</b-button>
+      </b-col>
       <b-col cols="2 py-3">
-        <b-badge pill :variant="makeVideoBadge.variantType">{{
+        <b-badge pill :variant="makeVideoBadge.variantType">
+          {{
           makeVideoBadge.text
-        }}</b-badge>
+          }}
+        </b-badge>
       </b-col>
     </b-row>
   </div>

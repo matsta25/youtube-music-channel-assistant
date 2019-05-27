@@ -11,7 +11,7 @@
                 width="30"
                 src="./assets/logo.svg"
                 class="d-inline-block align-top"
-              />
+              >
               ymca
             </router-link>
           </b-navbar-brand>
@@ -31,7 +31,7 @@
                 href="https://github.com/matsta25/youtube-music-channel-assistant"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fab', 'github']" />
+                <font-awesome-icon :icon="['fab', 'github']"/>
               </b-nav-item>
               <b-nav-item class="d-inline-block align-top">
                 <span v-if="this.$store.state.user.displayName">
@@ -42,8 +42,7 @@
                       width="30"
                       height="30"
                       rounded="circle"
-                    ></b-img
-                    >)
+                    ></b-img>)
                   </a>
                 </span>
                 <span v-else>
@@ -58,26 +57,26 @@
 
     <div id="body">
       <b-container>
-        <router-view />
+        <router-view/>
       </b-container>
     </div>
     <div id="footer">
       <footer>
         <b-container class="footer__inner">
-          <hr />
+          <hr>
           <b-row>
             <b-col>
               <a
                 href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/README.md"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fab', 'readme']" /> readme
+                <font-awesome-icon :icon="['fab', 'readme']"/>readme
               </a>
               <a
                 href="https://github.com/matsta25/youtube-music-channel-assistant/issues"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fas', 'bug']" /> issues
+                <font-awesome-icon :icon="['fas', 'bug']"/>issues
               </a>
             </b-col>
             <b-col>
@@ -88,7 +87,7 @@
                   width="30"
                   src="./assets/logo.svg"
                   class="d-inline-block align-top"
-                />
+                >
               </router-link>
             </b-col>
             <b-col>
@@ -96,10 +95,10 @@
                 href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/LICENSE"
                 target="blank"
               >
-                <font-awesome-icon :icon="['fab', 'github']" /> matsta25
+                <font-awesome-icon :icon="['fab', 'github']"/>matsta25
               </a>
               <a href="https://github.com/matsta25" target="blank">
-                <font-awesome-icon :icon="['fas', 'user-circle']" /> license
+                <font-awesome-icon :icon="['fas', 'user-circle']"/>license
               </a>
             </b-col>
           </b-row>

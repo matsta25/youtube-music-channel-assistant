@@ -47,7 +47,7 @@ app.use("/api/video", video);
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () =>
   // eslint-disable-next-line
-    console.log(`Example app listening on port ${port}!`)
+  console.log(`Example app listening on port ${port}!`)
 );
 
 global.io = require("socket.io")(server);

@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <b-row class="my-3">
-      <b-col cols="4 py-2">3. Upload logo image: </b-col>
+      <b-col cols="4 py-2">3. Upload logo image:</b-col>
       <b-col cols="6">
         <b-form-file
           @change="changeLogo"
@@ -13,9 +13,11 @@
         ></b-form-file>
       </b-col>
       <b-col cols="2 py-1">
-        <b-badge pill :variant="logoBadge.variantType">{{
+        <b-badge pill :variant="logoBadge.variantType">
+          {{
           logoBadge.text
-        }}</b-badge>
+          }}
+        </b-badge>
       </b-col>
     </b-row>
   </div>

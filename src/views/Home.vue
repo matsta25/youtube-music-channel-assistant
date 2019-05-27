@@ -2,9 +2,9 @@
   <div class="home">
     <h2 class="title">ymca - youtube music channel assistant</h2>
     <div class="container">
-      <img class="background" src="../assets/ymcaBackground.svg" />
+      <img class="background" src="../assets/ymcaBackground.svg">
       <div class="centered-element">
-        <img class="logo" src="../assets/logo.svg" />
+        <img class="logo" src="../assets/logo.svg">
       </div>
     </div>
 
