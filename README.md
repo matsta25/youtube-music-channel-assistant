@@ -47,7 +47,7 @@ and go to http://localhost
 
 ## Deployment
 
-<b>Check it out :fire:<a href="www.y-m-c-a.tk">HERE</a></b>:fire:.
+<b>Check it out :fire: [HERE](https://www.y-m-c-a.tk)</b>:fire:.
 
 ## Built With
 
