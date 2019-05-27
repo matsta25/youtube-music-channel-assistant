@@ -36,7 +36,6 @@ app.use(express.static(path.join(__dirname, "./dist")));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("*", mainRouter);
 app.use("/", mainRouter);
 app.use("/auth", authRouter);
 app.use("/create", createRouter);

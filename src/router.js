@@ -25,10 +25,10 @@ export default new Router({
       name: "create",
       component: Create
     },
-    {
-      path: "*",
-      name: "pagenotfound",
-      component: PageNotFound
-    }
+    // {
+    //   path: "*",
+    //   name: "pagenotfound",
+    //   component: PageNotFound
+    // }
   ]
 });
