@@ -22,11 +22,9 @@ module.exports = (() => {
 
           init.save(err => {
             if(err) throw err
-            console.log('Init saved')
             res.json({ video: { description: '' } })
           })
         } else {
-          console.log('Video found: ', video)
           res.json({ video })
         }
       })

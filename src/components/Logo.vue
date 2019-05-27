@@ -13,7 +13,9 @@
         ></b-form-file>
       </b-col>
       <b-col cols="2 py-1">
-        <b-badge pill :variant="logoBadge.variantType">{{ logoBadge.text }}</b-badge>
+        <b-badge pill :variant="logoBadge.variantType">{{
+          logoBadge.text
+        }}</b-badge>
       </b-col>
     </b-row>
   </div>
@@ -32,10 +34,10 @@ export default {
   },
   methods: {
     changeLogo(value) {
-      this.$store.dispatch("changeLogoBadge", { data: { code: -2 } })
+      this.$store.dispatch("changeLogoBadge", { data: { code: -2 } });
       let logoData = value.target.files[0];
       const fd = new FormData();
-      fd.append('logo', logoData, logoData.name);
+      fd.append("logo", logoData, logoData.name);
       this.$store.dispatch("changeLogo", fd);
     }
   }
@@ -43,5 +45,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

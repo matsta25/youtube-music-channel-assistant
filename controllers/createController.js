@@ -69,17 +69,15 @@ exports.sendToYoutube = (req, res) => {
 }
 
 exports.saveTemplate = (req, res) => {
-    console.log(JSON.stringify(req.body.data))
     let descritpion = req.body.data.descritpion
     let id = req.body.data.id
 
     User.findOneAndUpdate({ 'id': id },{$set:{'lastTemplateDescription': descritpion}}, {useFindAndModify: false}, function (err, doc) {
-    if(err){
-        console.log(err)
-    }
-    console.log(doc)
+        if(err){
+            // eslint-disable-next-line
+            console.log(err)
+        }
     })
-    // lastTemplateDescription
     
     res.json({
         data: `Saving ${JSON.stringify(descritpion)}`

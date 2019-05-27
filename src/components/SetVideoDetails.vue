@@ -4,7 +4,10 @@
       <b-col cols="3 py-5">5: Set video details:</b-col>
 
       <b-col cols="9">
-        <b-form-input :value="videoDetails.title" placeholder="Enter your title"></b-form-input>
+        <b-form-input
+          :value="videoDetails.title"
+          placeholder="Enter your title"
+        ></b-form-input>
         <b-form-textarea
           id="textarea"
           :value="videoDetails.descritpion"
@@ -35,5 +38,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

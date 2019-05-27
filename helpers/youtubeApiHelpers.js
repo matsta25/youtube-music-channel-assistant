@@ -25,6 +25,7 @@ exports.sendToYoutube = function (data) {
             }
         }, (err, data) => {
             if(err){
+                // eslint-disable-next-line
                 console.log("err: "+err)
                 code = 1
             }

@@ -2,9 +2,9 @@
   <div class="videoPreview">
     <b-row class="my-3">
       <b-col cols="12" v-if="outputPath">
-          <b-embed type="video" aspect="16by9" controls>
-            <source :src="outputPath" type="video/webm">
-          </b-embed>
+        <b-embed type="video" aspect="16by9" controls>
+          <source :src="outputPath" type="video/webm" />
+        </b-embed>
       </b-col>
     </b-row>
   </div>
@@ -22,5 +22,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

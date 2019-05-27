@@ -1,10 +1,10 @@
-var history = require('connect-history-api-fallback');
+var history = require("connect-history-api-fallback");
 
 var fixMiddleware = history();
 
-var router = require('express').Router();
+var router = require("express").Router();
 
-router.get('/create',fixMiddleware)
-router.get('/signin',fixMiddleware)
+router.get("/create", fixMiddleware);
+router.get("/signin", fixMiddleware);
 
-module.exports = router
+module.exports = router;
