@@ -13,7 +13,7 @@ Vue.use(BootstrapVue);
 import VueSocketIO from "vue-socket.io";
 Vue.use(
   new VueSocketIO({
-    connection: process.env.APP_URL,
+    connection: "http://localhost",
     vuex: {
       store,
       actionPrefix: "SOCKET_",
