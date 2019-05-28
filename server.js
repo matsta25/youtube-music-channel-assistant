@@ -12,6 +12,13 @@ const authRouter = require("./routes/auth");
 const mainRouter = require("./routes/main");
 const createRouter = require("./routes/create");
 
+const CronJob = require("cron").CronJob;
+const cronHelper = require("./helpers/cronHelpers");
+
+new CronJob("00 00 00 * * *", function() {
+  cronHelper.delRes();
+});
+
 const fixMiddleware = require("./spa-fix");
 
 app.use(fixMiddleware);
