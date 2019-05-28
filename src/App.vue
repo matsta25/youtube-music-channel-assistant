@@ -92,12 +92,12 @@
             </b-col>
             <b-col>
               <a
-                href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/LICENSE"
+                href="https://github.com/matsta25"
                 target="blank"
               >
                 <font-awesome-icon :icon="['fab', 'github']"/>matsta25
               </a>
-              <a href="https://github.com/matsta25" target="blank">
+              <a href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/LICENSE" target="blank">
                 <font-awesome-icon :icon="['fas', 'user-circle']"/>license
               </a>
             </b-col>
