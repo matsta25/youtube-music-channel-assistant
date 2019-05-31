@@ -1,5 +1,5 @@
-<template>
-  <div id="app">
+ 7U J8NI MK,+<template>
+  <div id="app" class="wrapper">
     <div id="header">
       <b-navbar id="nav" toggleable="lg" type="dark" variant="dark">
         <b-container>
@@ -55,7 +55,7 @@
       </b-navbar>
     </div>
 
-    <div id="body">
+    <div id="body" class="d-flex align-items-center">
       <b-container>
         <router-view/>
       </b-container>
@@ -64,7 +64,7 @@
       <footer>
         <b-container class="footer__inner">
           <hr>
-          <b-row>
+          <b-row class="row-edit">
             <b-col>
               <a
                 href="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/README.md"
@@ -167,20 +167,7 @@ body {
   height: 100%;
 }
 
-#app {
-  min-height: 100%;
-  position: relative;
-}
-
-#header {
-}
-
-#body {
-  padding-bottom: 91px; /* Height of the footer */
-}
-
 #footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   height: 91px; /* Height of the footer */
@@ -200,14 +187,19 @@ body {
   border-color: #5299c8 !important;
 }
 
-// test
-
-#body {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+.row-edit{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#body{
+  flex-grow: 1;
+}
+
 </style>
