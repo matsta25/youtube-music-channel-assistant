@@ -9,13 +9,7 @@
     </div>
 
     <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores
-      voluptatem sit officiis cupiditate quidem perferendis nobis minima animi
-      modi quos repudiandae fugiat dignissimos, in praesentium ab, fuga itaque
-      laborum pariatur. Lorem ipsum dolor sit, amet consectetur adipisicing
-      elit. Dolores voluptatem sit officiis cupiditate quidem perferendis nobis
-      minima animi modi quos repudiandae fugiat dignissimos, in praesentium ab,
-      fuga itaque laborum pariatur.
+      This application is designed to automate process of creating a music channel on YouTube.
     </div>
   </div>
 </template>

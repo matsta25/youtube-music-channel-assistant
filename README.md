@@ -4,7 +4,7 @@ DEMO GIF:
 
 <img src="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/ymca-demogif.gif" alt="alt tag" style="max-width:100%;">
 
-This website helps you to create youtube music channel more easily.
+This application is designed to automate process of creating a music channel on YouTube.
 
 ### Prerequisites
 
