@@ -1,0 +1,17 @@
+#this ver. works with nginx port 80 maped
+
+version: "3"
+
+services:
+  ymca:
+    build: .
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
