@@ -7,3 +7,7 @@ services:
 
 script:
   - docker-compose up -d
+
+notifications:
+  - email: false
+  
