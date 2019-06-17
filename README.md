@@ -1,5 +1,7 @@
 # YMCA - youtube music channel assistant.
 
+[![Build Status](https://travis-ci.org/matsta25/youtube-music-channel-assistant.svg?branch=master)](https://travis-ci.org/matsta25/youtube-music-channel-assistant)
+
 DEMO GIF:
 
 <img src="https://github.com/matsta25/youtube-music-channel-assistant/blob/master/ymca-demogif.gif" alt="alt tag" style="max-width:100%;">
