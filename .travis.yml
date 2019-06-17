@@ -6,5 +6,4 @@ services:
   - docker
 
 script:
-  - echo "hello world"
-  
+  - docker-compose up
