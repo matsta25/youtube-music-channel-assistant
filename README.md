@@ -10,7 +10,11 @@ This application is designed to automate process of creating a music channel on 
 
 ### Prerequisites
 
-To local run you need to install Docker:
+First of all create your own .env file. Template is available in .env.example.
+
+Create an app on [google console](https://www.console.developers.google.com), enable YouTube Data API v3 and paste data to your .env.
+
+Then, you need to install Docker:
 
 Windows:
 
@@ -38,6 +42,8 @@ git clone https://github.com/matsta25/youtube-music-channel-assistant.git
 ```
 cd youtube-music-channel-assistant
 ```
+
+(remember to create .env file with correct data)
 
 4. Build and start container:
 
