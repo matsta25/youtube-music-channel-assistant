@@ -11,11 +11,9 @@ RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
 #update
 RUN apt-get update --yes
 
-# node js
-RUN apt-get install --yes curl
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-RUN apt-get install --yes nodejs
-RUN apt-get install --yes build-essential
+RUN apt-get -y install curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN apt-get -y install nodejs
 
 # ffmpeg
 RUN apt-get install --yes ffmpeg
@@ -28,11 +26,11 @@ WORKDIR /ymca/
 
 COPY package*.json ./
 
-CMD ["npm", "install"]
+RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+RUN npm run start
 
 #vue
-CMD ["npm", "run", "build"]
+#RUN npm run build
