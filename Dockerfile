@@ -28,13 +28,11 @@ WORKDIR /ymca/
 
 COPY package*.json ./
 
-RUN npm install
+CMD ["npm", "install"]
 
 COPY . .
 
 CMD ["npm", "run", "start"]
 
 #vue
-RUN npm run build
-
-
+CMD ["npm", "run", "build"]
